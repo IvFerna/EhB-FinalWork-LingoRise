@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmernvclgwryu"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_tqecv"]
+[ext_resource type="Texture2D" uid="uid://bnkpihl5yfq5a" path="res://assets/icon.svg" id="2_8dnwg"]
+
+[node name="TouchControls" type="CanvasLayer"]
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("1_tqecv")]
+offset_left = 373.0
+offset_top = -375.0
+offset_right = 673.0
+offset_bottom = -75.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+action_left = "left"
+action_right = "right"
+action_up = "up"
+action_down = "down"
+
+[node name="Button" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2(114, 1709)
+texture_normal = ExtResource("2_8dnwg")
