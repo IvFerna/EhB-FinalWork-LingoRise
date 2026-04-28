@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bids0kc1i5ani"]
+
+[ext_resource type="Script" uid="uid://bvanse0svf4v0" path="res://scripts/gameplay/Item.cs" id="1_k8lgd"]
+[ext_resource type="Texture2D" uid="uid://bnkpihl5yfq5a" path="res://assets/icon.svg" id="1_wbkfk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8lgd"]
+size = Vector2(134, 139)
+
+[node name="Item" type="Area2D"]
+script = ExtResource("1_k8lgd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k8lgd")
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_wbkfk")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
