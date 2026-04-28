@@ -15,5 +15,8 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 
+# Backup files
+*~
+
 GIT_COMMIT_PLAN.md
 custom_assets/
