@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://brtggtmxuud6d"]
+
+[ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="1_g64xb"]
+[ext_resource type="Texture2D" uid="uid://b3dibmekbct7w" path="res://assets/BreadItem.png" id="1_h0nms"]
+
+[resource]
+script = ExtResource("1_g64xb")
+ItemId = "bread"
+ItemName = "Bread"
+Description = "Fresh bakery bread"
+Icon = ExtResource("1_h0nms")
+metadata/_custom_type_script = "uid://b8rma08qyirun"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://cr54h2s4y7e85"]
+
+[ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="1_ghi4f"]
+[ext_resource type="Texture2D" uid="uid://cv0jyy1fyiojg" path="res://assets/DonutItem.png" id="1_jqwlx"]
+
+[resource]
+script = ExtResource("1_ghi4f")
+ItemId = "donut"
+ItemName = "Donut"
+Description = "donut for bakery"
+Icon = ExtResource("1_jqwlx")
+metadata/_custom_type_script = "uid://b8rma08qyirun"
