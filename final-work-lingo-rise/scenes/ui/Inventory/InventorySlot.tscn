@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://clfwgriumy76m"]
+
+[ext_resource type="Script" uid="uid://b25phas85w1o2" path="res://scripts/systems/Inventory/InventorySlot.cs" id="1_gpoz7"]
+[ext_resource type="Texture2D" uid="uid://dmx52eagwgdy7" path="res://assets/ItemSlot.png" id="2_nllgf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h6rf8"]
+texture = ExtResource("2_nllgf")
+
+[node name="InventorySlot" type="PanelContainer"]
+custom_minimum_size = Vector2(96, 96)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_h6rf8")
+script = ExtResource("1_gpoz7")
+
+[node name="ItemIcon" type="TextureRect" parent="."]
+layout_mode = 2
