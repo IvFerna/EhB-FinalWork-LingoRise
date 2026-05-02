@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjf6upacpp1si"]
+[gd_scene load_steps=10 format=3 uid="uid://cjf6upacpp1si"]
 
 [ext_resource type="PackedScene" uid="uid://cke7iuitu10sy" path="res://scenes/core/Player.tscn" id="1_nrstr"]
 [ext_resource type="PackedScene" uid="uid://cmernvclgwryu" path="res://scenes/ui/touch_controls.tscn" id="2_g3khn"]
 [ext_resource type="PackedScene" uid="uid://b7oovmhtlj7ac" path="res://scenes/core/NPC.tscn" id="3_fun78"]
 [ext_resource type="PackedScene" uid="uid://bids0kc1i5ani" path="res://scenes/core/Item.tscn" id="4_5pwbx"]
-[ext_resource type="Texture2D" uid="uid://b3dibmekbct7w" path="res://assets/BreadItem.png" id="5_kitw3"]
+[ext_resource type="Resource" uid="uid://bagcp77m1o5gg" path="res://resources/baker.tres" id="4_p1ppg"]
+[ext_resource type="Resource" uid="uid://brtggtmxuud6d" path="res://resources/items/bread.tres" id="5_kitw3"]
+[ext_resource type="PackedScene" uid="uid://brxltwf52bapw" path="res://scenes/ui/Inventory/InventoryUI.tscn" id="6_a4rsn"]
+[ext_resource type="Resource" uid="uid://chdjhqtqyje8q" path="res://resources/items/cake.tres" id="7_8tad8"]
+[ext_resource type="Resource" uid="uid://m1s7kpfjyc8u" path="res://resources/items/milk.tres" id="8_8tad8"]
 
 [node name="Main" type="Node2D"]
 
@@ -19,10 +23,18 @@ size_flags_horizontal = 4
 
 [node name="Npc" parent="." instance=ExtResource("3_fun78")]
 position = Vector2(32, -2)
-NpcName = "Billy Bob"
-Dialogue = "The Super Mario Galaxy Movie is better than Iron Lung."
+NpcData = ExtResource("4_p1ppg")
 
 [node name="Item" parent="." instance=ExtResource("4_5pwbx")]
 position = Vector2(216, 801)
-ItemName = "Bread"
-Icon = ExtResource("5_kitw3")
+ItemData = ExtResource("5_kitw3")
+
+[node name="InventoryUI" parent="." instance=ExtResource("6_a4rsn")]
+
+[node name="Item2" parent="." instance=ExtResource("4_5pwbx")]
+position = Vector2(570, 1048)
+ItemData = ExtResource("7_8tad8")
+
+[node name="Item3" parent="." instance=ExtResource("4_5pwbx")]
+position = Vector2(763, 812)
+ItemData = ExtResource("8_8tad8")
