@@ -7,7 +7,8 @@ public partial class PlayerController : CharacterBody2D
     [Export] private float moveSpeed = 200f;
     private bool _canMove = true;
     private Vector2 ScreenSize;
-
+    private InventoryComponent _inventory;
+    private InventoryUI _inventoryUI;
     public override void _Ready()
     {
         if (Instance != null && Instance != this)
@@ -18,6 +19,9 @@ public partial class PlayerController : CharacterBody2D
         Instance = this;
 
         ScreenSize = GetViewportRect().Size;
+        _inventory = GetNode<InventoryComponent>("InventoryComponent");
+        _inventoryUI = GetTree().CurrentScene.GetNode<InventoryUI>("InventoryUI");
+        _inventory.InventoryChanged += OnInventoryChanged;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -38,6 +42,23 @@ public partial class PlayerController : CharacterBody2D
         MoveAndSlide();
     }
 
+    public bool AddToInventory(InventoryItem item)
+    {
+        return _inventory.AddItem(item);
+    }
+
+    public bool HasItem(string itemId)
+    {
+        return _inventory.HasItem(itemId);
+    }
+    private void OnInventoryChanged()
+    {
+        _inventoryUI.UpdateInventory(_inventory.GetItems());
+    }
+    public bool RemoveFromInventory(string itemId)
+    {
+        return _inventory.RemoveItem(itemId);
+    }
 
 }
 
