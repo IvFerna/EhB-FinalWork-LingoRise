@@ -7,7 +7,10 @@
 [resource]
 script = ExtResource("1_xrfvb")
 NpcName = "Bob"
-Dialogue = "What do you want to buy?"
+GreetingDialogue = "Hola, bienvenido a la panadería."
+RequestDialogue = "¿Quieres comprar un {item}?"
+WrongItemDialogue = "¿Seguro que quieres un {item}?"
+SuccessDialogue = "¡Que tengas un buen día!"
 NpcTexture = ExtResource("2_ujn0o")
 DesiredItem = ExtResource("1_u2msi")
 metadata/_custom_type_script = "uid://4wy848rg8kuj"

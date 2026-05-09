@@ -1,18 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjf6upacpp1si"]
+[gd_scene load_steps=7 format=3 uid="uid://cjf6upacpp1si"]
 
-[ext_resource type="PackedScene" uid="uid://cke7iuitu10sy" path="res://scenes/core/Player.tscn" id="1_nrstr"]
+[ext_resource type="PackedScene" uid="uid://cywbaygma62ql" path="res://scenes/scenarios/BakeryScene.tscn" id="1_v0fxp"]
 [ext_resource type="PackedScene" uid="uid://cmernvclgwryu" path="res://scenes/ui/touch_controls.tscn" id="2_g3khn"]
-[ext_resource type="PackedScene" uid="uid://b7oovmhtlj7ac" path="res://scenes/core/NPC.tscn" id="3_fun78"]
-[ext_resource type="PackedScene" uid="uid://bids0kc1i5ani" path="res://scenes/core/Item.tscn" id="4_5pwbx"]
-[ext_resource type="Resource" uid="uid://bagcp77m1o5gg" path="res://resources/baker.tres" id="4_p1ppg"]
-[ext_resource type="Resource" uid="uid://brtggtmxuud6d" path="res://resources/items/bread.tres" id="5_kitw3"]
+[ext_resource type="Script" uid="uid://bfo48654bxr1" path="res://scripts/core/RequestSystem.cs" id="4_a4rsn"]
+[ext_resource type="Script" uid="uid://bkk6feo5ytl5" path="res://scripts/core/WordSystem.cs" id="5_1wb4g"]
+[ext_resource type="PackedScene" uid="uid://bv8q4i62mlbj6" path="res://scenes/ui/QuestUI.tscn" id="6_8tad8"]
 [ext_resource type="PackedScene" uid="uid://brxltwf52bapw" path="res://scenes/ui/Inventory/InventoryUI.tscn" id="6_a4rsn"]
-[ext_resource type="Resource" uid="uid://chdjhqtqyje8q" path="res://resources/items/cake.tres" id="7_8tad8"]
-[ext_resource type="Resource" uid="uid://m1s7kpfjyc8u" path="res://resources/items/milk.tres" id="8_8tad8"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_nrstr")]
+[node name="BakeryScene" parent="." instance=ExtResource("1_v0fxp")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -21,20 +18,14 @@ size_flags_horizontal = 4
 
 [node name="TouchControls" parent="Control" instance=ExtResource("2_g3khn")]
 
-[node name="Npc" parent="." instance=ExtResource("3_fun78")]
-position = Vector2(32, -2)
-NpcData = ExtResource("4_p1ppg")
-
-[node name="Item" parent="." instance=ExtResource("4_5pwbx")]
-position = Vector2(216, 801)
-ItemData = ExtResource("5_kitw3")
-
 [node name="InventoryUI" parent="." instance=ExtResource("6_a4rsn")]
 
-[node name="Item2" parent="." instance=ExtResource("4_5pwbx")]
-position = Vector2(570, 1048)
-ItemData = ExtResource("7_8tad8")
+[node name="Systems" type="Node" parent="."]
 
-[node name="Item3" parent="." instance=ExtResource("4_5pwbx")]
-position = Vector2(763, 812)
-ItemData = ExtResource("8_8tad8")
+[node name="RequestSystem" type="Node" parent="Systems"]
+script = ExtResource("4_a4rsn")
+
+[node name="WordSystem" type="Node" parent="Systems"]
+script = ExtResource("5_1wb4g")
+
+[node name="QuestUi" parent="." instance=ExtResource("6_8tad8")]

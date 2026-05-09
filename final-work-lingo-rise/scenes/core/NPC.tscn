@@ -4,18 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://chel74oo28s36" path="res://assets/playerDummy.png" id="2_y00di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y00di"]
-size = Vector2(179, 249)
+size = Vector2(179, 258.5)
 
 [node name="Npc" type="Area2D"]
 script = ExtResource("1_y00di")
 
 [node name="NpcSprite" type="Sprite2D" parent="."]
-position = Vector2(190.5, 331.10806)
-scale = Vector2(0.62890625, 0.7899063)
 texture = ExtResource("2_y00di")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(191.5, 333.5)
+position = Vector2(0, 4.75)
 shape = SubResource("RectangleShape2D_y00di")
+
+[node name="BubbleAnchor" type="Marker2D" parent="."]
+position = Vector2(-104, -132)
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

@@ -7,8 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kaei4"]
 size = Vector2(53, 159.00002)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_kaei4")
+moveSpeed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(497, 1476)
