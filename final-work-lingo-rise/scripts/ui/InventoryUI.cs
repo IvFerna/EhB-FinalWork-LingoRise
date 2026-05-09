@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public partial class InventoryUI : CanvasLayer
 {
-    private List<InventorySlot> _slots = new();
+    private List<PanelContainer> _slots = new();
 
     public override void _Ready()
     {
-        _slots.Add(GetNode<InventorySlot>("PanelContainer/HBoxContainer/InventorySlot1"));
-        _slots.Add(GetNode<InventorySlot>("PanelContainer/HBoxContainer/InventorySlot2"));
-        _slots.Add(GetNode<InventorySlot>("PanelContainer/HBoxContainer/InventorySlot3"));
+        _slots.Add(GetNode<PanelContainer>("PanelContainer/HBoxContainer/InventorySlot1"));
+        _slots.Add(GetNode<PanelContainer>("PanelContainer/HBoxContainer/InventorySlot2"));
+        _slots.Add(GetNode<PanelContainer>("PanelContainer/HBoxContainer/InventorySlot3"));
     }
 
     public void UpdateInventory(List<InventoryItem> items)
@@ -18,11 +18,11 @@ public partial class InventoryUI : CanvasLayer
         {
             if (i < items.Count)
             {
-                _slots[i].SetItem(items[i]);
+                _slots[i].Call("SetItem", items[i]);
             }
             else
             {
-                _slots[i].SetItem(null);
+                _slots[i].Call("SetItem", (InventoryItem)null);
             }
         }
     }

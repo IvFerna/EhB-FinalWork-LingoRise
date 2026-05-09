@@ -1,32 +1,121 @@
+using System.Reflection;
 using Godot;
-using System;
 
 public partial class NpcController : Area2D
 {
     [Export] public NPC NpcData { get; set; }
+    [Export] public float GreetingDelay { get; set; } = 0.35f;
 
-    public override void _Ready()
+    private RequestSystem _requestSystem;
+    private WordSystem _wordSystem;
+
+    private PackedScene _textBubbleScene;
+    private SpeechBubble _activeBubble;
+
+    public override async void _Ready()
     {
         Sprite2D sprite = GetNode<Sprite2D>("NpcSprite");
+
+        _requestSystem = GetTree()
+            .CurrentScene
+            .GetNode<RequestSystem>("Systems/RequestSystem");
+
+        _wordSystem = GetTree()
+            .CurrentScene
+            .GetNode<WordSystem>("Systems/WordSystem");
+
+        _textBubbleScene =
+              GD.Load<PackedScene>(
+                  "res://scenes/ui/SpeechBubble.tscn"
+              );
+
         if (NpcData != null && NpcData.NpcTexture != null)
         {
             sprite.Texture = NpcData.NpcTexture;
         }
-        GD.Print(NpcData.NpcName + " says: " + NpcData.Dialogue);
+
+        await ToSignal(GetTree().CreateTimer(GreetingDelay), "timeout");
+
+        ShowDialogue(
+            NpcData.GreetingDialogue
+        );
     }
-    public void OnBodyEntered(Node2D body)
+
+    public void OnBodyEntered(Node body)
     {
-        if (body is PlayerController player)
+        if (body is not PlayerController player)
+            return;
+
+        // Start request if no active request
+        if (_requestSystem.CurrentRequestedItem == null)
         {
-            if (player.HasItem("bread"))
-            {
-                GD.Print("Gifted bread to " + NpcData.NpcName);
-                player.RemoveFromInventory("bread");
-            }
-            else
-            {
-                GD.Print(NpcData.NpcName + " says: " + NpcData.Dialogue);
-            }
+
+            _requestSystem.StartRequest(
+                NpcData.DesiredItem
+            );
+
+            _wordSystem.RegisterExposure(
+                NpcData.DesiredItem.TargetLanguageWord
+            );
+
+            string requestDialogue =
+            NpcData.RequestDialogue.Replace(
+                "{item}",
+                NpcData.DesiredItem.TargetLanguageWord
+            );
+
+            ShowDialogue(requestDialogue);
+            return;
         }
+
+
+        // Try delivery
+        InventoryItem heldItem = player.GetHeldItem();
+
+        if (heldItem == null)
+            return;
+
+        if (_requestSystem.ValidateItem(heldItem))
+        {
+            GD.Print($"Delivered {heldItem.ItemName}");
+
+            player.RemoveFromInventory(heldItem.ItemId);
+
+            _wordSystem.RegisterExposure(
+                heldItem.TargetLanguageWord
+            );
+
+            ShowDialogue(
+                NpcData.SuccessDialogue
+            );
+
+            _requestSystem.CompleteRequest();
+        }
+        else
+        {
+            string wrongDialogue =
+                NpcData.WrongItemDialogue.Replace(
+                    "{item}",
+                    heldItem.TargetLanguageWord
+                );
+
+            ShowDialogue(wrongDialogue);
+        }
+    }
+
+    private void ShowDialogue(string text)
+    {
+        if (_activeBubble != null)
+        {
+            _activeBubble.QueueFree();
+        }
+
+        _activeBubble =
+            _textBubbleScene.Instantiate<SpeechBubble>();
+
+        GetNode<Node2D>("BubbleAnchor")
+            .AddChild(_activeBubble);
+
+        _activeBubble.ShowText(text);
     }
 }

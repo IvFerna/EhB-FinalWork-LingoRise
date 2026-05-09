@@ -5,22 +5,36 @@ using System;
 
 public partial class InventoryComponent : Node
 {
-    [Export] public int MaxSlots = 3;
+    [Export] public int MaxSlots = 1;
 
     public event Action InventoryChanged;
+
     private List<InventoryItem> _items = new();
 
-    public bool AddItem(InventoryItem item)
+    private Item _heldWorldItem;
+
+    public bool AddItem(Item worldItem)
     {
+        if (worldItem == null || worldItem.ItemData == null)
+            return false;
+
+        // Replace currently held item
         if (_items.Count >= MaxSlots)
         {
-            GD.Print("Inventory full");
-            return false;
+            if (_heldWorldItem != null)
+            {
+                _heldWorldItem.ReturnToWorld();
+            }
+
+            _items.Clear();
         }
 
-        _items.Add(item);
+        _items.Add(worldItem.ItemData);
+        _heldWorldItem = worldItem;
+
         InventoryChanged?.Invoke();
-        GD.Print($"Added {item.ItemName}");
+
+        GD.Print($"Added {worldItem.ItemData.ItemName}");
 
         return true;
     }
@@ -34,9 +48,11 @@ public partial class InventoryComponent : Node
     {
         return _items;
     }
+
     public bool RemoveItem(string itemId)
     {
-        InventoryItem itemToRemove = _items.Find(item => item.ItemId == itemId);
+        InventoryItem itemToRemove =
+            _items.Find(item => item.ItemId == itemId);
 
         if (itemToRemove == null)
         {
@@ -46,6 +62,8 @@ public partial class InventoryComponent : Node
 
         _items.Remove(itemToRemove);
 
+        _heldWorldItem = null;
+
         GD.Print($"Removed {itemToRemove.ItemName}");
 
         InventoryChanged?.Invoke();
@@ -53,4 +71,11 @@ public partial class InventoryComponent : Node
         return true;
     }
 
+    public InventoryItem GetSelectedItem()
+    {
+        if (_items.Count == 0)
+            return null;
+
+        return _items[0];
+    }
 }

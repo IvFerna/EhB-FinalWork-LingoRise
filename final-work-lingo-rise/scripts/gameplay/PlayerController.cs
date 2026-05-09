@@ -42,7 +42,7 @@ public partial class PlayerController : CharacterBody2D
         MoveAndSlide();
     }
 
-    public bool AddToInventory(InventoryItem item)
+    public bool AddToInventory(Item item)
     {
         return _inventory.AddItem(item);
     }
@@ -58,6 +58,11 @@ public partial class PlayerController : CharacterBody2D
     public bool RemoveFromInventory(string itemId)
     {
         return _inventory.RemoveItem(itemId);
+    }
+
+    public InventoryItem GetHeldItem()
+    {
+        return _inventory.GetSelectedItem();
     }
 
 }
