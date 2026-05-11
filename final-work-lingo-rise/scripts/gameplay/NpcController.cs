@@ -7,7 +7,7 @@ public partial class NpcController : Area2D
     [Export] public float GreetingDelay { get; set; } = 0.35f;
 
     private RequestSystem _requestSystem;
-    private WordSystem _wordSystem;
+    private LexiconManager _wordSystem;
 
     private PackedScene _textBubbleScene;
     private SpeechBubble _activeBubble;
@@ -22,7 +22,7 @@ public partial class NpcController : Area2D
 
         _wordSystem = GetTree()
             .CurrentScene
-            .GetNode<WordSystem>("Systems/WordSystem");
+            .GetNode<LexiconManager>("Systems/LexiconManager");
 
         _textBubbleScene =
               GD.Load<PackedScene>(
@@ -55,13 +55,13 @@ public partial class NpcController : Area2D
             );
 
             _wordSystem.RegisterExposure(
-                NpcData.DesiredItem.TargetLanguageWord
+                NpcData.DesiredItem.Id
             );
 
             string requestDialogue =
             NpcData.RequestDialogue.Replace(
                 "{item}",
-                NpcData.DesiredItem.TargetLanguageWord
+                NpcData.DesiredItem.ForeignWord
             );
 
             ShowDialogue(requestDialogue);
@@ -79,10 +79,10 @@ public partial class NpcController : Area2D
         {
             GD.Print($"Delivered {heldItem.ItemName}");
 
-            player.RemoveFromInventory(heldItem.ItemId);
+            player.RemoveFromInventory(heldItem.Id);
 
             _wordSystem.RegisterExposure(
-                heldItem.TargetLanguageWord
+                heldItem.Id
             );
 
             ShowDialogue(
@@ -96,7 +96,7 @@ public partial class NpcController : Area2D
             string wrongDialogue =
                 NpcData.WrongItemDialogue.Replace(
                     "{item}",
-                    heldItem.TargetLanguageWord
+                    heldItem.ForeignWord
                 );
 
             ShowDialogue(wrongDialogue);
