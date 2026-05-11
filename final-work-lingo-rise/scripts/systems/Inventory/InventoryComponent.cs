@@ -41,7 +41,7 @@ public partial class InventoryComponent : Node
 
     public bool HasItem(string itemId)
     {
-        return _items.Any(item => item.ItemId == itemId);
+        return _items.Any(item => item.Id == itemId);
     }
 
     public List<InventoryItem> GetItems()
@@ -52,7 +52,7 @@ public partial class InventoryComponent : Node
     public bool RemoveItem(string itemId)
     {
         InventoryItem itemToRemove =
-            _items.Find(item => item.ItemId == itemId);
+            _items.Find(item => item.Id == itemId);
 
         if (itemToRemove == null)
         {

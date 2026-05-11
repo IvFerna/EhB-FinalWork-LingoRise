@@ -5,14 +5,14 @@ public partial class Item : Area2D
     [Export] public InventoryItem ItemData { get; set; }
 
     private Sprite2D _sprite;
-    private WordSystem _wordSystem;
+    private LexiconManager _wordSystem;
 
     public override void _Ready()
     {
         _sprite = GetNode<Sprite2D>("ItemSprite");
 
-        _wordSystem = GetNode<WordSystem>(
-            "/root/Main/Systems/WordSystem"
+        _wordSystem = GetNode<LexiconManager>(
+            "/root/Main/Systems/LexiconManager"
         );
 
         if (ItemData != null && ItemData.Icon != null)
@@ -34,7 +34,7 @@ public partial class Item : Area2D
         GD.Print($"Picked up {ItemData.ItemName}");
 
         _wordSystem.RegisterExposure(
-            ItemData.TargetLanguageWord
+            ItemData.ForeignWord
         );
 
         var requestSystem =

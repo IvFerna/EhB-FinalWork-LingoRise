@@ -5,11 +5,9 @@
 
 [resource]
 script = ExtResource("1_flfdt")
-ItemId = "milk"
 ItemName = "Milk"
 Description = "milk for bakery"
 Icon = ExtResource("1_40saw")
-TargetLanguageWord = "Leche"
-NativeLanguageWord = "Melk"
-Category = "Food"
+ForeignWord = "Leche"
+NativeTranslation = "Melk"
 metadata/_custom_type_script = "uid://b8rma08qyirun"

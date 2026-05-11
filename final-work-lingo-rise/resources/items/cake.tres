@@ -5,11 +5,9 @@
 
 [resource]
 script = ExtResource("1_47vf3")
-ItemId = "cake"
 ItemName = "Cake"
 Description = "Cake for bakery"
 Icon = ExtResource("1_vv1sl")
-TargetLanguageWord = "Pastel"
-NativeLanguageWord = "Taart"
-Category = "Food"
+ForeignWord = "Pastel"
+NativeTranslation = "Taart"
 metadata/_custom_type_script = "uid://b8rma08qyirun"
