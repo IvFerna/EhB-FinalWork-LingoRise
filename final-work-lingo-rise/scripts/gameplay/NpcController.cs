@@ -16,13 +16,9 @@ public partial class NpcController : Area2D
     {
         Sprite2D sprite = GetNode<Sprite2D>("NpcSprite");
 
-        _requestSystem = GetTree()
-            .CurrentScene
-            .GetNode<RequestSystem>("Systems/RequestSystem");
+        _requestSystem = GetNode<RequestSystem>("/root/RequestSystem");
 
-        _wordSystem = GetTree()
-            .CurrentScene
-            .GetNode<LexiconManager>("Systems/LexiconManager");
+        _wordSystem = GetNode<LexiconManager>("/root/LexiconManager");
 
         _textBubbleScene =
               GD.Load<PackedScene>(
@@ -45,15 +41,18 @@ public partial class NpcController : Area2D
     {
         if (body is not PlayerController player)
             return;
-
+        GD.Print($"Interacted with {NpcData.NpcName}");
         // Start request if no active request
         if (_requestSystem.CurrentRequestedItem == null)
         {
 
+            GD.Print($"Starting request for {NpcData.DesiredItem.ItemName}");
             _requestSystem.StartRequest(
                 NpcData.DesiredItem
             );
 
+            GD.Print($"Registering exposure for {NpcData.DesiredItem.ForeignWord}");
+            GD.Print($"Desired item ID: {NpcData.DesiredItem.Id}");
             _wordSystem.RegisterExposure(
                 NpcData.DesiredItem.Id
             );

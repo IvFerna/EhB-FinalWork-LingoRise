@@ -12,7 +12,7 @@ public partial class Item : Area2D
         _sprite = GetNode<Sprite2D>("ItemSprite");
 
         _wordSystem = GetNode<LexiconManager>(
-            "/root/Main/Systems/LexiconManager"
+            "/root/LexiconManager"
         );
 
         if (ItemData != null && ItemData.Icon != null)
@@ -34,12 +34,12 @@ public partial class Item : Area2D
         GD.Print($"Picked up {ItemData.ItemName}");
 
         _wordSystem.RegisterExposure(
-            ItemData.ForeignWord
+            ItemData.Id
         );
 
         var requestSystem =
             GetNode<RequestSystem>(
-                "/root/Main/Systems/RequestSystem"
+                "/root/RequestSystem"
             );
 
         if (requestSystem.CurrentRequestedItem == ItemData)

@@ -11,7 +11,7 @@ public partial class QuestUI : Control
         _subLabel = GetNode<Label>("Panel/VBoxContainer/SubQuestLabel");
 
         var requestSystem =
-            GetNode<RequestSystem>("/root/Main/Systems/RequestSystem");
+            GetNode<RequestSystem>("/root/RequestSystem");
 
         requestSystem.RequestStateChanged += UpdateSubQuest;
         requestSystem.RequestCompleted += ClearSubQuest;
