@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cywbaygma62ql"]
+[gd_scene load_steps=19 format=4 uid="uid://cywbaygma62ql"]
 
 [ext_resource type="Texture2D" uid="uid://duxba6ius6f6y" path="res://assets/Tilesets/Interiors_free_48x48.png" id="1_2c5f2"]
 [ext_resource type="PackedScene" uid="uid://cke7iuitu10sy" path="res://scenes/core/Player.tscn" id="2_i57qm"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://b7oovmhtlj7ac" path="res://scenes/core/NPC.tscn" id="3_ln0eu"]
 [ext_resource type="Resource" uid="uid://bagcp77m1o5gg" path="res://resources/baker.tres" id="4_hlodl"]
 [ext_resource type="PackedScene" uid="uid://bids0kc1i5ani" path="res://scenes/core/Item.tscn" id="6_ooij2"]
-[ext_resource type="Resource" uid="uid://chdjhqtqyje8q" path="res://resources/items/cake.tres" id="7_umrm6"]
+[ext_resource type="Resource" uid="uid://t4r6kl1b1a2w" path="res://resources/items/cakeTest.tres" id="7_vcx8l"]
 [ext_resource type="Resource" uid="uid://brtggtmxuud6d" path="res://resources/items/bread.tres" id="8_ka0gm"]
 [ext_resource type="Resource" uid="uid://cr54h2s4y7e85" path="res://resources/items/donut.tres" id="9_kngjx"]
 [ext_resource type="Texture2D" uid="uid://8eie2blsrtrk" path="res://assets/Items/CakeItem.png" id="10_kngjx"]
 [ext_resource type="Texture2D" uid="uid://b3dibmekbct7w" path="res://assets/Items/BreadItem.png" id="11_vcx8l"]
+[ext_resource type="Resource" uid="uid://m1s7kpfjyc8u" path="res://resources/items/milk.tres" id="12_vcx8l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdwj7"]
 texture = ExtResource("1_2c5f2")
@@ -1207,7 +1208,7 @@ position = Vector2(1, 1)
 
 [node name="Item" parent="." instance=ExtResource("6_ooij2")]
 position = Vector2(573, 1065)
-ItemData = ExtResource("7_umrm6")
+ItemData = ExtResource("7_vcx8l")
 
 [node name="Item2" parent="." instance=ExtResource("6_ooij2")]
 position = Vector2(317, 1061)
@@ -1266,3 +1267,10 @@ position = Vector2(442.00003, 675)
 rotation = 0.36651915
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("11_vcx8l")
+
+[node name="Item4" parent="." instance=ExtResource("6_ooij2")]
+position = Vector2(741, 1409)
+ItemData = ExtResource("12_vcx8l")
+
+[node name="Item5" parent="." instance=ExtResource("6_ooij2")]
+position = Vector2(741, 1409)

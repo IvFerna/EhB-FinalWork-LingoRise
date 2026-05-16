@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjf6upacpp1si"]
+[gd_scene load_steps=6 format=3 uid="uid://cjf6upacpp1si"]
 
 [ext_resource type="PackedScene" uid="uid://cywbaygma62ql" path="res://scenes/scenarios/BakeryScene.tscn" id="1_v0fxp"]
 [ext_resource type="PackedScene" uid="uid://cmernvclgwryu" path="res://scenes/ui/touch_controls.tscn" id="2_g3khn"]
-[ext_resource type="Script" uid="uid://bfo48654bxr1" path="res://scripts/core/RequestSystem.cs" id="4_a4rsn"]
-[ext_resource type="Script" uid="uid://caw6sx7mv2hj8" path="res://scripts/core/LexiconManager.cs" id="5_a4rsn"]
+[ext_resource type="PackedScene" uid="uid://bt0p75iy2gx4e" path="res://scenes/ui/LexiconMenu.tscn" id="5_kitw3"]
 [ext_resource type="PackedScene" uid="uid://bv8q4i62mlbj6" path="res://scenes/ui/QuestUI.tscn" id="6_8tad8"]
 [ext_resource type="PackedScene" uid="uid://brxltwf52bapw" path="res://scenes/ui/Inventory/InventoryUI.tscn" id="6_a4rsn"]
 
@@ -20,12 +19,6 @@ size_flags_horizontal = 4
 
 [node name="InventoryUI" parent="." instance=ExtResource("6_a4rsn")]
 
-[node name="Systems" type="Node" parent="."]
-
-[node name="RequestSystem" type="Node" parent="Systems"]
-script = ExtResource("4_a4rsn")
-
-[node name="LexiconManager" type="Node" parent="Systems"]
-script = ExtResource("5_a4rsn")
-
 [node name="QuestUi" parent="." instance=ExtResource("6_8tad8")]
+
+[node name="LexiconMenu" parent="." instance=ExtResource("5_kitw3")]
