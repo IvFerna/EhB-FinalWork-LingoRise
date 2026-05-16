@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_47vf3")
+Id = "cake"
 ItemName = "Cake"
 Description = "Cake for bakery"
 Icon = ExtResource("1_vv1sl")

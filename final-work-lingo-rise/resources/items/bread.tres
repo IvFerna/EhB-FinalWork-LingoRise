@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_g64xb")
+Id = "bread"
 ItemName = "Bread"
 Description = "Fresh bakery bread"
 Icon = ExtResource("1_h0nms")
