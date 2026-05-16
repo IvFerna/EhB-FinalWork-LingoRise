@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5tlmdivw7hj8"]
+
+[ext_resource type="Script" uid="uid://btytr04mscwqt" path="res://scripts/ui/LexiconPanel.cs" id="1_l2epk"]
+[ext_resource type="PackedScene" uid="uid://b41fdcjt2esac" path="res://scenes/core/WordCard.tscn" id="2_pttwm"]
+[ext_resource type="PackedScene" uid="uid://duyj4sj8ks7iy" path="res://scenes/core/LockedWordCard.tscn" id="3_pttwm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l2epk"]
+
+[node name="LexiconPanel" type="Control" node_paths=PackedStringArray("_grid", "_nextButton", "_previousButton", "_pageLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l2epk")
+_wordCardScene = ExtResource("2_pttwm")
+_lockedCardScene = ExtResource("3_pttwm")
+_grid = NodePath("MarginContainer/VBoxContainer/GridContainer")
+_nextButton = NodePath("MarginContainer/VBoxContainer/PageNavigation/NextButton")
+_previousButton = NodePath("MarginContainer/VBoxContainer/PageNavigation/PrevButton")
+_pageLabel = NodePath("MarginContainer/VBoxContainer/PageNavigation/PageLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+material = SubResource("CanvasItemMaterial_l2epk")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -472.5
+offset_top = -768.0
+offset_right = 472.5
+offset_bottom = 768.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+columns = 2
+
+[node name="PageNavigation" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="MarginContainer/VBoxContainer/PageNavigation"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = " < "
+
+[node name="PageLabel" type="Label" parent="MarginContainer/VBoxContainer/PageNavigation"]
+layout_mode = 2
+text = " Page"
+
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/PageNavigation"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = " > "

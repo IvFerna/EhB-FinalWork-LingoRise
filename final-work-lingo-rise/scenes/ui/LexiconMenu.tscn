@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt0p75iy2gx4e"]
+
+[ext_resource type="PackedScene" uid="uid://c5tlmdivw7hj8" path="res://scenes/ui/LexiconPanel.tscn" id="1_gft0v"]
+[ext_resource type="Script" uid="uid://b2drxuf3ovo3k" path="res://scripts/systems/lexicon/LexiconMenu.cs" id="1_xqc0g"]
+[ext_resource type="FontFile" uid="uid://bv6svs635fubm" path="res://assets/Fonts/CinzelDecorative-Bold.ttf" id="3_ln73q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xqc0g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tiyfs"]
+font = ExtResource("3_ln73q")
+font_size = 64
+
+[node name="LexiconMenu" type="CanvasLayer"]
+script = ExtResource("1_xqc0g")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05490196, 0.24705882, 0.26666668, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xqc0g")
+
+[node name="LexiconPanel" parent="Control/PanelContainer" instance=ExtResource("1_gft0v")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 31.0
+offset_right = -35.0
+offset_bottom = 126.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Close"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.5
+offset_top = 122.0
+offset_right = 93.5
+offset_bottom = 177.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Lexicon"
+label_settings = SubResource("LabelSettings_tiyfs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="OnCloseButtonPressed"]
