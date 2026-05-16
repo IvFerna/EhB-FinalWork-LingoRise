@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://t4r6kl1b1a2w"]
+
+[ext_resource type="Texture2D" uid="uid://8eie2blsrtrk" path="res://assets/Items/CakeItem.png" id="1_p42bx"]
+[ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="2_csbmq"]
+
+[resource]
+script = ExtResource("2_csbmq")
+Id = "cakeTest"
+ItemName = "Cake"
+Description = "Cake for bakery"
+Icon = ExtResource("1_p42bx")
+ForeignWord = "Pastel"
+NativeTranslation = "Taart"
+metadata/_custom_type_script = "uid://b8rma08qyirun"
