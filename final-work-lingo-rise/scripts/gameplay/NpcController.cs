@@ -9,8 +9,7 @@ public partial class NpcController : Area2D
     private RequestSystem _requestSystem;
     private LexiconManager _wordSystem;
 
-    private PackedScene _textBubbleScene;
-    private SpeechBubble _activeBubble;
+
 
     public override async void _Ready()
     {
@@ -20,10 +19,6 @@ public partial class NpcController : Area2D
 
         _wordSystem = GetNode<LexiconManager>("/root/LexiconManager");
 
-        _textBubbleScene =
-              GD.Load<PackedScene>(
-                  "res://scenes/ui/SpeechBubble.tscn"
-              );
 
         if (NpcData != null && NpcData.NpcTexture != null)
         {
@@ -32,12 +27,14 @@ public partial class NpcController : Area2D
 
         await ToSignal(GetTree().CreateTimer(GreetingDelay), "timeout");
 
-        ShowDialogue(
+        await DialogueManager.Instance.ShowDialogue(
+            GetNode<Node2D>("BubbleAnchor"),
+            "es",
             NpcData.GreetingDialogue
         );
     }
 
-    public void OnBodyEntered(Node body)
+    public async void OnBodyEntered(Node body)
     {
         if (body is not PlayerController player)
             return;
@@ -63,7 +60,11 @@ public partial class NpcController : Area2D
                 NpcData.DesiredItem.ForeignWord
             );
 
-            ShowDialogue(requestDialogue);
+            await DialogueManager.Instance.ShowDialogue(
+                GetNode<Node2D>("BubbleAnchor"),
+                "es",
+                requestDialogue
+            );
             return;
         }
 
@@ -84,7 +85,9 @@ public partial class NpcController : Area2D
                 heldItem.Id
             );
 
-            ShowDialogue(
+            await DialogueManager.Instance.ShowDialogue(
+                GetNode<Node2D>("BubbleAnchor"),
+                "es",
                 NpcData.SuccessDialogue
             );
 
@@ -98,23 +101,11 @@ public partial class NpcController : Area2D
                     heldItem.ForeignWord
                 );
 
-            ShowDialogue(wrongDialogue);
+            await DialogueManager.Instance.ShowDialogue(
+                GetNode<Node2D>("BubbleAnchor"),
+                "es",
+                wrongDialogue
+            );
         }
-    }
-
-    private void ShowDialogue(string text)
-    {
-        if (_activeBubble != null)
-        {
-            _activeBubble.QueueFree();
-        }
-
-        _activeBubble =
-            _textBubbleScene.Instantiate<SpeechBubble>();
-
-        GetNode<Node2D>("BubbleAnchor")
-            .AddChild(_activeBubble);
-
-        _activeBubble.ShowText(text);
     }
 }
