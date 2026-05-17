@@ -13,7 +13,15 @@ const MODEL_PATH = path.join(
 );
 
 function normalizeText(text) {
-	return sanitize(text.toLowerCase().trim().replace(/\s+/g, "_"));
+	return sanitize(
+		text
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "")
+			.replace(/[^\w\s]/gi, "")
+			.toLowerCase()
+			.trim()
+			.replace(/\s+/g, "_"),
+	);
 }
 
 exports.generateSpeech = async (text, language) => {
@@ -25,7 +33,10 @@ exports.generateSpeech = async (text, language) => {
 
 	// CACHE CHECK
 	if (fs.existsSync(outputPath)) {
-		return `/storage/tts/${fileName}`;
+		return {
+			audioPath: `/storage/tts/${fileName}`,
+			fileName,
+		};
 	}
 
 	return new Promise((resolve, reject) => {
@@ -34,16 +45,20 @@ exports.generateSpeech = async (text, language) => {
 			`--model "${MODEL_PATH}" ` +
 			`--output_file "${outputPath}"`;
 
+		console.log("================================");
 		console.log(PIPER_PATH);
 		console.log(MODEL_PATH);
 		console.log(outputPath);
+		console.log("================================\n");
 
 		exec(command, (error) => {
 			if (error) {
 				return reject(error);
 			}
-
-			resolve(`/storage/tts/${fileName}`);
+			resolve({
+				audioPath: `/storage/tts/${fileName}`,
+				fileName,
+			});
 		});
 	});
 };
