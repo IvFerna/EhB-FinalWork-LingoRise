@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_xrfvb")
 NpcName = "Bob"
-GreetingDialogue = "Hola, bienvenido a la panadería."
+GreetingDialogue = "Hola, bienvenido a la panaderia."
 RequestDialogue = "¿Quieres comprar un {item}?"
 WrongItemDialogue = "¿Seguro que quieres un {item}?"
 SuccessDialogue = "¡Que tengas un buen día!"

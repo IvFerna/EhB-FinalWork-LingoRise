@@ -21,8 +21,9 @@ LexiconManager="*res://scripts/autoload/LexiconManager.cs"
 RequestSystem="*res://scripts/autoload/RequestSystem.cs"
 LocalLexiconRepository="*res://scripts/autoload/LocalLexiconRepository.cs"
 AudioManager="*res://scripts/autoload/AudioManager.cs"
-TTSService="*res://scripts/autoload/TTSService.cs"
 VocabularyManager="*res://scripts/autoload/VocabularyManager.cs"
+TTSService="*res://scripts/autoload/TTSService.cs"
+DialogueManager="*res://scripts/autoload/DialogueManager.cs"
 
 [display]
 
