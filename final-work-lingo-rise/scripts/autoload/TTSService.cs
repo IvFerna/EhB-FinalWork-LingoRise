@@ -11,10 +11,16 @@ public partial class TTSService : Node
     public override void _Ready()
     {
         Instance = this;
-        DirAccess.MakeDirRecursiveAbsolute("user://tts");
+
+        DirAccess.MakeDirRecursiveAbsolute(
+            "user://tts"
+        );
     }
 
-    public async Task PlayWord(string language, string word)
+    public async Task PlayAudio(
+        string language,
+        string text
+    )
     {
         HttpRequest request = new HttpRequest();
 
@@ -25,15 +31,19 @@ public partial class TTSService : Node
 
         var body = new Godot.Collections.Dictionary
         {
-            { "text", word },
+            { "text", text },
             { "language", language }
         };
 
-        string jsonBody = Json.Stringify(body);
+        string jsonBody =
+            Json.Stringify(body);
 
         request.Request(
             url,
-            new string[] { "Content-Type: application/json" },
+            new string[]
+            {
+                "Content-Type: application/json"
+            },
             HttpClient.Method.Post,
             jsonBody
         );
@@ -44,50 +54,64 @@ public partial class TTSService : Node
                 HttpRequest.SignalName.RequestCompleted
             );
 
-        var responseBody = result[3].AsByteArray();
+        var responseBody =
+            result[3].AsByteArray();
 
         string json =
             responseBody.GetStringFromUtf8();
 
-        GD.Print(json);
+        GD.Print($"TTS Response: {json}");
 
-        var parsed = Json.ParseString(json).AsGodotDictionary();
+        var parsed =
+            Json.ParseString(json)
+            .AsGodotDictionary();
 
-        string audioPath = parsed["audioPath"].AsString();
-        GD.Print($"Audio path: {audioPath}");
+        string audioPath =
+            parsed["audioPath"].AsString();
 
-        string audioUrl = $"{BASE_URL}{audioPath}";
-        GD.Print($"Audio URL: {audioUrl}");
+        string fileName =
+            parsed["fileName"].AsString();
 
-
-        string fileName = $"{language}_{word}.wav";
+        string audioUrl =
+            $"{BASE_URL}{audioPath}";
 
         string localPath =
             $"user://tts/{fileName}";
 
+        GD.Print($"Audio URL: {audioUrl}");
+        GD.Print($"Local Path: {localPath}");
+
+        // LOCAL CACHE CHECK
         if (!FileAccess.FileExists(localPath))
         {
-            localPath = await DownloadAudio(
-                audioUrl,
-                fileName
+            GD.Print(
+                $"Downloading audio: {fileName}"
             );
 
-            GD.Print($"Downloaded audio: {localPath}");
+            localPath =
+                await DownloadAudio(
+                    audioUrl,
+                    fileName
+                );
         }
         else
         {
-            GD.Print($"Using cached audio: {localPath}");
+            GD.Print(
+                $"Using cached audio: {fileName}"
+            );
         }
 
-        AudioManager.Instance.PlayWav(localPath);
-
-
-        AudioManager.Instance.PlayWav(localPath);
+        AudioManager.Instance.PlayWav(
+            localPath
+        );
 
         request.QueueFree();
     }
 
-    private async Task<string> DownloadAudio(string url, string fileName)
+    private async Task<string> DownloadAudio(
+        string url,
+        string fileName
+    )
     {
         HttpRequest request = new HttpRequest();
 
@@ -100,10 +124,21 @@ public partial class TTSService : Node
 
         request.Request(url);
 
-        await ToSignal(
+        var result = await ToSignal(
             request,
             HttpRequest.SignalName.RequestCompleted
         );
+
+        long responseCode = (long)result[1];
+
+        if (responseCode != 200)
+        {
+            GD.PrintErr(
+                $"Failed to download audio. HTTP {responseCode}"
+            );
+        }
+
+        GD.Print($"HTTP Response Code: {responseCode}");
 
         request.QueueFree();
 
