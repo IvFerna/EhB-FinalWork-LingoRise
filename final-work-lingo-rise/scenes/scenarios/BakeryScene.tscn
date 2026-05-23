@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7oovmhtlj7ac" path="res://scenes/core/NPC.tscn" id="3_ln0eu"]
 [ext_resource type="Resource" uid="uid://bagcp77m1o5gg" path="res://resources/baker.tres" id="4_hlodl"]
 [ext_resource type="PackedScene" uid="uid://bids0kc1i5ani" path="res://scenes/core/Item.tscn" id="6_ooij2"]
-[ext_resource type="Resource" uid="uid://t4r6kl1b1a2w" path="res://resources/items/cakeTest.tres" id="7_vcx8l"]
+[ext_resource type="Resource" uid="uid://chdjhqtqyje8q" path="res://resources/items/cake.tres" id="7_kngjx"]
 [ext_resource type="Resource" uid="uid://brtggtmxuud6d" path="res://resources/items/bread.tres" id="8_ka0gm"]
 [ext_resource type="Resource" uid="uid://cr54h2s4y7e85" path="res://resources/items/donut.tres" id="9_kngjx"]
 [ext_resource type="Texture2D" uid="uid://8eie2blsrtrk" path="res://assets/Items/CakeItem.png" id="10_kngjx"]
@@ -1207,7 +1207,7 @@ position = Vector2(1, 1)
 
 [node name="Item" parent="." instance=ExtResource("6_ooij2")]
 position = Vector2(573, 1065)
-ItemData = ExtResource("7_vcx8l")
+ItemData = ExtResource("7_kngjx")
 
 [node name="Item2" parent="." instance=ExtResource("6_ooij2")]
 position = Vector2(317, 1061)
