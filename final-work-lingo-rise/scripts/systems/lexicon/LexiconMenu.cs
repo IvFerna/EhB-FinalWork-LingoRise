@@ -1,12 +1,9 @@
 using Godot;
 using System;
 
-public partial class LexiconMenu : CanvasLayer
+public partial class LexiconMenu : Control
 {
-    public override void _Ready()
-    {
-        Visible = false;
-    }
+
 
     public override void _Process(double delta)
     {
@@ -17,9 +14,8 @@ public partial class LexiconMenu : CanvasLayer
         }
     }
 
-    private void OnCloseButtonPressed()
+    private void OnClosePressed()
     {
-        Visible = false;
-        GD.Print("Lexicon Menu closed through button.");
+        UIManager.Instance.CloseAllMenus();
     }
 }
