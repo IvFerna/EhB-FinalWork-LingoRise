@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpuks88pe858q"]
+
+[ext_resource type="PackedScene" uid="uid://55c3887x6ih" path="res://scenes/ui/Menus/MainMenu.tscn" id="1_n0qho"]
+[ext_resource type="Script" uid="uid://c6b5n3lywcohe" path="res://scripts/ui/UIManager.cs" id="1_n6qwv"]
+[ext_resource type="PackedScene" uid="uid://bt0p75iy2gx4e" path="res://scenes/ui/Menus/LexiconMenu.tscn" id="2_n6qwv"]
+[ext_resource type="PackedScene" uid="uid://58ah7jpm007i" path="res://scenes/ui/Menus/SettingsMenu.tscn" id="4_eo1ti"]
+
+[node name="UIManager" type="CanvasLayer" node_paths=PackedStringArray("_mainMenu", "_settingsMenu", "_lexiconMenu")]
+script = ExtResource("1_n6qwv")
+_mainMenu = NodePath("MainMenu")
+_settingsMenu = NodePath("SettingsMenu")
+_lexiconMenu = NodePath("LexiconMenu")
+
+[node name="MainMenu" parent="." instance=ExtResource("1_n0qho")]
+
+[node name="LexiconMenu" parent="." instance=ExtResource("2_n6qwv")]
+
+[node name="SettingsMenu" parent="." instance=ExtResource("4_eo1ti")]
