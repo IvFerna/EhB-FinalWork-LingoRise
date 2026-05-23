@@ -1,9 +1,11 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 public partial class LexiconPanel : Control
 {
+
     [Export] private PackedScene _wordCardScene;
     [Export] private PackedScene _lockedCardScene;
     [Export] private GridContainer _grid;
@@ -13,13 +15,17 @@ public partial class LexiconPanel : Control
 
     [Export] private Label _pageLabel;
 
+    [Export] private Button _nounFilterButton;
+    [Export] private Button _verbFilterButton;
+    [Export] private Button _adjectiveFilterButton;
+
     private LexiconManager _wordSystem;
     private LocalLexiconRepository _repository;
 
     private List<ILexiconEntry> _entries = new();
 
     private int _currentPage = 0;
-
+    private WordCategory? _activeFilter = null;
     private const int CardsPerPage = 4;
 
     private Vector2 _touchStartPosition;
@@ -32,13 +38,18 @@ public partial class LexiconPanel : Control
         _wordSystem = GetNode<LexiconManager>("/root/LexiconManager");
         _repository = GetNode<LocalLexiconRepository>("/root/LocalLexiconRepository");
 
-        _wordSystem.OnWordUnlocked += HandleWordUnlocked;
+        // _wordSystem.OnWordUnlocked += HandleWordUnlocked;
+        _wordSystem.OnLexiconUpdated += HandleLexiconUpdated;
 
         _nextButton.Pressed += NextPage;
         _previousButton.Pressed += PreviousPage;
 
         RefreshEntries();
         PopulatePage();
+
+        _nounFilterButton.Pressed += () => ToggleFilter(WordCategory.Noun);
+        _verbFilterButton.Pressed += () => ToggleFilter(WordCategory.Verb);
+        _adjectiveFilterButton.Pressed += () => ToggleFilter(WordCategory.Adjective);
     }
 
     public override void _Input(InputEvent @event)
@@ -78,11 +89,16 @@ public partial class LexiconPanel : Control
 
     private void RefreshEntries()
     {
-        _entries = _wordSystem
-            .GetUnlockedWords()
-            .Select(id => _repository.GetById(id))
-            .Where(entry => entry != null)
-            .ToList();
+        IEnumerable<ILexiconEntry> entries =
+            _wordSystem.GetUnlockedEntries();
+
+        if (_activeFilter.HasValue)
+        {
+            entries = entries.Where(entry =>
+                entry.Category == _activeFilter.Value);
+        }
+
+        _entries = entries.ToList();
     }
 
     private void PopulatePage()
@@ -165,17 +181,48 @@ public partial class LexiconPanel : Control
         _nextButton.Disabled = _currentPage >= maxPage;
     }
 
-    private void HandleWordUnlocked(string wordId)
+    private void HandleLexiconUpdated()
     {
         RefreshEntries();
 
-        int maxPage = Mathf.CeilToInt((float)_entries.Count / CardsPerPage) - 1;
+        int maxPage = Mathf.Max(
+            0,
+            Mathf.CeilToInt((float)_entries.Count / CardsPerPage) - 1
+        );
 
-        if (_currentPage > maxPage)
-        {
-            _currentPage = maxPage;
-        }
+        _currentPage = Mathf.Clamp(_currentPage, 0, maxPage);
 
         PopulatePage();
+    }
+
+    private void ToggleFilter(WordCategory category)
+    {
+        if (_activeFilter == category)
+        {
+            _activeFilter = null;
+        }
+        else
+        {
+            _activeFilter = category;
+        }
+
+        _currentPage = 0;
+
+        RefreshEntries();
+        PopulatePage();
+
+        UpdateFilterButtonVisuals();
+    }
+
+    private void UpdateFilterButtonVisuals()
+    {
+        _nounFilterButton.ButtonPressed =
+            _activeFilter == WordCategory.Noun;
+
+        _verbFilterButton.ButtonPressed =
+            _activeFilter == WordCategory.Verb;
+
+        _adjectiveFilterButton.ButtonPressed =
+            _activeFilter == WordCategory.Adjective;
     }
 }

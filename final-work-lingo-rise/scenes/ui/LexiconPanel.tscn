@@ -6,7 +6,7 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l2epk"]
 
-[node name="LexiconPanel" type="Control" node_paths=PackedStringArray("_grid", "_nextButton", "_previousButton", "_pageLabel")]
+[node name="LexiconPanel" type="Control" node_paths=PackedStringArray("_grid", "_nextButton", "_previousButton", "_pageLabel", "_nounFilterButton", "_verbFilterButton", "_adjectiveFilterButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,9 @@ _grid = NodePath("MarginContainer/VBoxContainer/GridContainer")
 _nextButton = NodePath("MarginContainer/VBoxContainer/PageNavigation/NextButton")
 _previousButton = NodePath("MarginContainer/VBoxContainer/PageNavigation/PrevButton")
 _pageLabel = NodePath("MarginContainer/VBoxContainer/PageNavigation/PageLabel")
+_nounFilterButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer/NounFilterButton")
+_verbFilterButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VerbFilterButton")
+_adjectiveFilterButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AdjectiveFilterButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 material = SubResource("CanvasItemMaterial_l2epk")
@@ -41,11 +44,40 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="NounFilterButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Filter Noun"
+
+[node name="VerbFilterButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Filter Verb"
+
+[node name="AdjectiveFilterButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Filter Adjective"
+
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 25
 theme_override_constants/v_separation = 25
 columns = 2
+
+[node name="Control" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pttwm")]
+layout_mode = 2
+
+[node name="Control2" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pttwm")]
+layout_mode = 2
+
+[node name="Control3" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pttwm")]
+layout_mode = 2
+
+[node name="Control4" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pttwm")]
+layout_mode = 2
 
 [node name="PageNavigation" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
