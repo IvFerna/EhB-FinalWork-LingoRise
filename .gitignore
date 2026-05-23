@@ -18,6 +18,9 @@ mono_crash.*.json
 # Backup files
 *~
 
+# Ignore .import files
+*.import
+
 GIT_COMMIT_PLAN.md
 custom_assets/
 /MVP_vids
