@@ -20,4 +20,7 @@ public partial class LexiconEntry : Resource, ILexiconEntry
 
     [Export]
     public WordCategory Category { get; set; }
+
+    [Export]
+    public int DifficultyLevel { get; set; } = 1;
 }

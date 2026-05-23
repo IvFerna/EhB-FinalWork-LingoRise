@@ -6,14 +6,12 @@ using System.Linq;
 public partial class LexiconManager : Node
 {
     private const int UnlockThreshold = 3;
-
     private Dictionary<string, int> _wordExposure = new();
     private HashSet<string> _unlockedWords = new();
     private ILexiconRepository _repository;
 
     public event Action<string> OnWordUnlocked;
-
-
+    public event Action OnLexiconUpdated;
 
     public override void _Ready()
     {
@@ -51,6 +49,7 @@ public partial class LexiconManager : Node
         {
             SaveProgress();
             OnWordUnlocked?.Invoke(wordId);
+            OnLexiconUpdated?.Invoke();
             GD.Print($"Unlocked word: {wordId}");
         }
     }
@@ -135,6 +134,7 @@ public partial class LexiconManager : Node
         {
             DirAccess.RemoveAbsolute(SavePath);
         }
+        OnLexiconUpdated?.Invoke();
     }
 
     public ILexiconEntry GetEntry(string id)
@@ -176,5 +176,52 @@ public partial class LexiconManager : Node
 
             GD.Print("Lexicon progress reset.");
         }
+        if (Input.IsActionJustPressed("debug_lexicon_unlock_all"))
+        {
+            UnlockAllWords();
+        }
+    }
+
+    public IEnumerable<ILexiconEntry> GetUnlockedEntries()
+    {
+        return _unlockedWords
+            .Select(id => _repository.GetById(id))
+            .Where(entry => entry != null);
+    }
+    public IEnumerable<ILexiconEntry> GetUnlockedEntriesByCategory(WordCategory category)
+    {
+        return GetUnlockedEntries()
+            .Where(entry => entry.Category == category);
+    }
+
+    public IEnumerable<ILexiconEntry> GetEntriesByCategory(WordCategory category)
+    {
+        return _repository
+            .GetAll()
+            .Where(entry => entry.Category == category);
+    }
+    public int GetUnlockedCount(WordCategory category)
+    {
+        return GetUnlockedEntriesByCategory(category).Count();
+    }
+    public int GetTotalCount(WordCategory category)
+    {
+        return GetEntriesByCategory(category).Count();
+    }
+    public void UnlockAllWords()
+    {
+        foreach (var entry in _repository.GetAll())
+        {
+            _unlockedWords.Add(entry.Id);
+
+            if (!_wordExposure.ContainsKey(entry.Id))
+            {
+                _wordExposure[entry.Id] = UnlockThreshold;
+            }
+        }
+        OnLexiconUpdated?.Invoke();
+        SaveProgress();
+
+        GD.Print("All lexicon words unlocked.");
     }
 }

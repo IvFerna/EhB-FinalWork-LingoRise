@@ -4,8 +4,8 @@ using Godot;
 
 public enum WordCategory
 {
-    Object,
-    Food,
+    Noun,
+    Adjective,
     Verb
 }
 
@@ -18,6 +18,8 @@ public partial class InventoryItem : Resource, ILexiconEntry
     [Export] public Texture2D Icon { get; set; }
     [Export] public string ForeignWord { get; set; }
     [Export] public string NativeTranslation { get; set; }
+    [Export] public AudioStream PronunciationAudio { get; set; }
+
     [Export] public int Quantity { get; set; } = 1;
 
     [Export] public WordCategory Category { get; set; }

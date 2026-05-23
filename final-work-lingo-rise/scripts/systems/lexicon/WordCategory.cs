@@ -4,7 +4,7 @@ namespace LingoRise.Lexicon.Models;
 
 public enum WordCategory
 {
-    Object,
-    Food,
-    Verb
+    Noun = 1,
+    Adjective = 2,
+    Verb = 3
 }

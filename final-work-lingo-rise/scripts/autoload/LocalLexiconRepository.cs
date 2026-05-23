@@ -14,7 +14,8 @@ public partial class LocalLexiconRepository : Node, ILexiconRepository
     private void LoadEntries()
     {
         LoadResourcesFromFolder("res://Resources/Items/");
-        LoadResourcesFromFolder("res://Resources/Lexicon/");
+        LoadResourcesFromFolder("res://Resources/Lexicon/Verbs/");
+
 
 
         GD.Print("=== LEXICON REPOSITORY ===");
@@ -45,6 +46,7 @@ public partial class LocalLexiconRepository : Node, ILexiconRepository
         {
             var fileName = dir.GetNext();
 
+            // GD.Print($"Found file: {fileName} in {path}");
             if (string.IsNullOrEmpty(fileName))
                 break;
 
@@ -57,6 +59,7 @@ public partial class LocalLexiconRepository : Node, ILexiconRepository
             var fullPath = path + fileName;
 
             var resource = ResourceLoader.Load<Resource>(fullPath);
+            GD.Print($"Loaded resource: {fullPath} | Type: {resource.GetType()}");
 
             if (resource is ILexiconEntry entry && !string.IsNullOrEmpty(entry.Id))
             {
