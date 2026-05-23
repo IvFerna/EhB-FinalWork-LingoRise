@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://55c3887x6ih"]
+
+[ext_resource type="Script" uid="uid://by38tos37pxf8" path="res://scripts/ui/MainMenu.cs" id="1_vjtqc"]
+[ext_resource type="Theme" uid="uid://cmmyssjsx62a4" path="res://assets/Themes/menuTheme.tres" id="2_2ysvc"]
+[ext_resource type="FontFile" uid="uid://bjq3ammn2qioh" path="res://assets/Fonts/Poppins-Medium.ttf" id="2_iwbf0"]
+[ext_resource type="FontFile" uid="uid://bv6svs635fubm" path="res://assets/Fonts/CinzelDecorative-Bold.ttf" id="3_2ysvc"]
+
+[sub_resource type="Theme" id="Theme_2ysvc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpiny"]
+bg_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_xpiny"]
+font = ExtResource("3_2ysvc")
+font_size = 48
+font_color = Color(0.93333334, 0.84313726, 0.49803922, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjtqc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03529412, 0.53333336, 0.5647059, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -356.0
+offset_right = 300.0
+offset_bottom = 356.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="HomeButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_2ysvc")
+theme_override_fonts/font = ExtResource("2_iwbf0")
+theme_override_font_sizes/font_size = 32
+text = "Home"
+
+[node name="LexiconButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_2ysvc")
+text = "Lexicon"
+
+[node name="SettingsButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_2ysvc")
+text = "Settings"
+
+[node name="ColorRect2" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27125925
+anchor_top = 0.09497917
+anchor_right = 0.72885185
+anchor_bottom = 0.15479167
+offset_left = 0.040008545
+offset_top = -0.3600006
+offset_right = -0.16003418
+offset_bottom = -0.2000122
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_2ysvc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xpiny")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control/ColorRect2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_xpiny")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -167.0
+offset_top = 45.0
+offset_right = -43.0
+offset_bottom = 139.0
+grow_horizontal = 0
+text = "Close"
+
+[connection signal="pressed" from="Control/VBoxContainer/HomeButton" to="." method="OnHomePressed"]
+[connection signal="pressed" from="Control/VBoxContainer/LexiconButton" to="." method="OnLexiconPressed"]
+[connection signal="pressed" from="Control/VBoxContainer/SettingsButton" to="." method="OnSettingsPressed"]
+[connection signal="pressed" from="CloseButton" to="." method="OnClosePressed"]
