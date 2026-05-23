@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cywbaygma62ql"]
+[gd_scene load_steps=18 format=4 uid="uid://cywbaygma62ql"]
 
 [ext_resource type="Texture2D" uid="uid://duxba6ius6f6y" path="res://assets/Tilesets/Interiors_free_48x48.png" id="1_2c5f2"]
 [ext_resource type="PackedScene" uid="uid://cke7iuitu10sy" path="res://scenes/core/Player.tscn" id="2_i57qm"]
@@ -11,7 +11,6 @@
 [ext_resource type="Resource" uid="uid://cr54h2s4y7e85" path="res://resources/items/donut.tres" id="9_kngjx"]
 [ext_resource type="Texture2D" uid="uid://8eie2blsrtrk" path="res://assets/Items/CakeItem.png" id="10_kngjx"]
 [ext_resource type="Texture2D" uid="uid://b3dibmekbct7w" path="res://assets/Items/BreadItem.png" id="11_vcx8l"]
-[ext_resource type="Resource" uid="uid://m1s7kpfjyc8u" path="res://resources/items/milk.tres" id="12_vcx8l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdwj7"]
 texture = ExtResource("1_2c5f2")
@@ -1267,10 +1266,3 @@ position = Vector2(442.00003, 675)
 rotation = 0.36651915
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("11_vcx8l")
-
-[node name="Item4" parent="." instance=ExtResource("6_ooij2")]
-position = Vector2(741, 1409)
-ItemData = ExtResource("12_vcx8l")
-
-[node name="Item5" parent="." instance=ExtResource("6_ooij2")]
-position = Vector2(741, 1409)
