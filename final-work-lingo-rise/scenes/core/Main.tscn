@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjf6upacpp1si"]
+[gd_scene format=3 uid="uid://cjf6upacpp1si"]
 
 [ext_resource type="PackedScene" uid="uid://cywbaygma62ql" path="res://scenes/scenarios/BakeryScene.tscn" id="1_v0fxp"]
 [ext_resource type="PackedScene" uid="uid://cmernvclgwryu" path="res://scenes/ui/touch_controls.tscn" id="2_g3khn"]
@@ -6,35 +6,35 @@
 [ext_resource type="PackedScene" uid="uid://bv8q4i62mlbj6" path="res://scenes/ui/QuestUI.tscn" id="6_8tad8"]
 [ext_resource type="PackedScene" uid="uid://brxltwf52bapw" path="res://scenes/ui/Inventory/InventoryUI.tscn" id="6_a4rsn"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=610220257]
 
-[node name="BakeryScene" parent="." instance=ExtResource("1_v0fxp")]
+[node name="BakeryScene" parent="." unique_id=1035025778 instance=ExtResource("1_v0fxp")]
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=189658929]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 
-[node name="TouchControls" parent="Control" instance=ExtResource("2_g3khn")]
+[node name="TouchControls" parent="Control" unique_id=1028174779 instance=ExtResource("2_g3khn")]
 
-[node name="InventoryUI" parent="." instance=ExtResource("6_a4rsn")]
+[node name="InventoryUI" parent="." unique_id=1656253928 instance=ExtResource("6_a4rsn")]
 
-[node name="QuestUi" parent="." instance=ExtResource("6_8tad8")]
+[node name="QuestUi" parent="." unique_id=609891266 instance=ExtResource("6_8tad8")]
 offset_top = 50.0
 offset_bottom = 50.0
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1304656990]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 979.0
+offset_left = 919.0
 offset_top = 17.0
 offset_right = 1059.0
-offset_bottom = 63.0
+offset_bottom = 135.0
 grow_horizontal = 0
 size_flags_horizontal = 8
 text = "Menu"
 
-[node name="UIManager" parent="." instance=ExtResource("5_kitw3")]
+[node name="UIManager" parent="." unique_id=688658435 instance=ExtResource("5_kitw3")]
 
 [connection signal="pressed" from="Button" to="UIManager" method="ToggleMainMenu"]
