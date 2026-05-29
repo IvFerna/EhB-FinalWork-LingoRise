@@ -5,8 +5,11 @@ public partial class TTSService : Node
 {
     public static TTSService Instance;
 
-    private const string BASE_URL =
-        "http://localhost:3000";
+    // At the top of TTSService
+    private string BASE_URL =>
+        ProjectSettings.HasSetting("tts/base_url")
+            ? ProjectSettings.GetSetting("tts/base_url").AsString()
+            : "http://localhost:3000";
 
     public override void _Ready()
     {

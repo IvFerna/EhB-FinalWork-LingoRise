@@ -1,12 +1,8 @@
-using Godot;
 using System.Collections.Generic;
 
-[GlobalClass]
-public partial class LexiconSaveData : Resource
+public class LexiconSaveData
 {
-    [Export]
-    public Godot.Collections.Dictionary<string, int> WordExposure { get; set; } = new();
+    public Dictionary<string, WordProgressData> WordProgress { get; set; } = new();
 
-    [Export]
-    public Godot.Collections.Array<string> UnlockedWords { get; set; } = new();
+    public List<string> UnlockedWords { get; set; } = new();
 }
