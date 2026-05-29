@@ -5,7 +5,7 @@
 		"sanitize-filename": "^1.6.4"
 	},
 	"scripts": {
-		"start": "node backend/src/main.js",
-		"dev": "node backend/src/main.js"
+		"start": "node src/main.js",
+		"dev": "node src/main.js"
 	}
 }
