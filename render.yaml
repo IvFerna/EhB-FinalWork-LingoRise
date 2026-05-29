@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: piper-tts-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && bash scripts/setup-piper.sh
+    startCommand: node src/main.js
+    envVars:
+      - key: PIPER_PATH
+        value: ./tools/piper/piper
+      - key: MODEL_PATH
+        value: ./tools/piper/models/es_ES-sharvard-medium.onnx
+      - key: PORT
+        value: 3000
+    disk:
+      name: tts-cache
+      mountPath: /opt/render/project/src/backend/src/storage
+      sizeGB: 1
