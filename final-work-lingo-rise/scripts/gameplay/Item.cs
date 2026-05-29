@@ -34,7 +34,8 @@ public partial class Item : Area2D
         GD.Print($"Picked up {ItemData.ItemName}");
 
         _wordSystem.RegisterExposure(
-            ItemData.Id
+            ItemData.VocabularyEntry.Id,
+            ExposureType.Interacted
         );
 
         var requestSystem =

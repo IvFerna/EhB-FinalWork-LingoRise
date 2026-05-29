@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://chdjhqtqyje8q"]
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://chdjhqtqyje8q"]
 
 [ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="1_47vf3"]
 [ext_resource type="Texture2D" uid="uid://8eie2blsrtrk" path="res://assets/Items/CakeItem.png" id="1_vv1sl"]
+[ext_resource type="Resource" uid="uid://bk2v2ps5nwo4t" path="res://resources/Lexicon/Nouns/noun_cake.tres" id="2_tbqlm"]
 
 [resource]
 script = ExtResource("1_47vf3")
@@ -9,6 +10,5 @@ Id = "cake"
 ItemName = "Cake"
 Description = "Cake for bakery"
 Icon = ExtResource("1_vv1sl")
-ForeignWord = "Pastel"
-NativeTranslation = "Taart"
+VocabularyEntry = ExtResource("2_tbqlm")
 metadata/_custom_type_script = "uid://b8rma08qyirun"

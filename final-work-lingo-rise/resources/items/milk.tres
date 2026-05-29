@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://m1s7kpfjyc8u"]
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://m1s7kpfjyc8u"]
 
 [ext_resource type="Texture2D" uid="uid://5ih2neai4mh5" path="res://assets/Items/milkItem.png" id="1_40saw"]
 [ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="1_flfdt"]
+[ext_resource type="Resource" uid="uid://dcqrxk1ov8e0r" path="res://resources/Lexicon/Nouns/noun_milk.tres" id="2_bjuwe"]
 
 [resource]
 script = ExtResource("1_flfdt")
@@ -9,6 +10,5 @@ Id = "milk"
 ItemName = "Milk"
 Description = "milk for bakery"
 Icon = ExtResource("1_40saw")
-ForeignWord = "Leche"
-NativeTranslation = "Melk"
+VocabularyEntry = ExtResource("2_bjuwe")
 metadata/_custom_type_script = "uid://b8rma08qyirun"

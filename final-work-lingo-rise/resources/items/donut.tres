@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://cr54h2s4y7e85"]
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://cr54h2s4y7e85"]
 
 [ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="1_ghi4f"]
 [ext_resource type="Texture2D" uid="uid://cv0jyy1fyiojg" path="res://assets/Items/DonutItem.png" id="1_jqwlx"]
+[ext_resource type="Resource" uid="uid://xhxjte0qc6uy" path="res://resources/Lexicon/Nouns/noun_donut.tres" id="2_fowm2"]
 
 [resource]
 script = ExtResource("1_ghi4f")
@@ -9,6 +10,5 @@ Id = "donut"
 ItemName = "Donut"
 Description = "donut for bakery"
 Icon = ExtResource("1_jqwlx")
-ForeignWord = "Dona"
-NativeTranslation = "Donut"
+VocabularyEntry = ExtResource("2_fowm2")
 metadata/_custom_type_script = "uid://b8rma08qyirun"
