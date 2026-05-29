@@ -19,6 +19,10 @@ run/main_scene="uid://cjf6upacpp1si"
 config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://assets/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cwjvogr22s8fb"
+
 [autoload]
 
 LexiconManager="*res://scripts/autoload/LexiconManager.cs"
@@ -28,6 +32,7 @@ AudioManager="*res://scripts/autoload/AudioManager.cs"
 VocabularyManager="*res://scripts/autoload/VocabularyManager.cs"
 TTSService="*res://scripts/autoload/TTSService.cs"
 DialogueManager="*res://scripts/autoload/DialogueManager.cs"
+AudioSettingsManager="*uid://5s8crj43andc"
 
 [display]
 
