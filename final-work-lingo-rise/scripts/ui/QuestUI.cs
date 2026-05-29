@@ -26,7 +26,7 @@ public partial class QuestUI : Control
         {
             case RequestSystem.RequestState.FindItem:
                 _subLabel.Text =
-                    $"Find {item.ForeignWord}";
+                    $"Find {item.VocabularyEntry.ForeignWord}";
                 break;
 
             case RequestSystem.RequestState.ReturnToBaker:

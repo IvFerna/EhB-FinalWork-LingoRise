@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bt0p75iy2gx4e"]
+[gd_scene format=3 uid="uid://bt0p75iy2gx4e"]
 
 [ext_resource type="PackedScene" uid="uid://c5tlmdivw7hj8" path="res://scenes/ui/LexiconPanel.tscn" id="1_gft0v"]
 [ext_resource type="Script" uid="uid://b2drxuf3ovo3k" path="res://scripts/systems/lexicon/LexiconMenu.cs" id="1_xqc0g"]
@@ -20,7 +20,7 @@ font = ExtResource("3_ln73q")
 font_size = 48
 font_color = Color(0.93333334, 0.84313726, 0.49803922, 1)
 
-[node name="LexiconMenu" type="Control"]
+[node name="LexiconMenu" type="Control" unique_id=1544877352]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xqc0g")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=570916115]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=312016677]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.03529412, 0.53333336, 0.5647059, 1)
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=977741248]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,12 +56,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_xqc0g")
 
-[node name="LexiconPanel" parent="Control/PanelContainer" instance=ExtResource("1_gft0v")]
+[node name="LexiconPanel" parent="Control/PanelContainer" unique_id=1693724210 instance=ExtResource("1_gft0v")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=905363704]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -75,7 +75,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Close"
 
-[node name="ColorRect2" type="PanelContainer" parent="."]
+[node name="ColorRect2" type="PanelContainer" parent="." unique_id=1574473274]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.27125925
@@ -92,7 +92,7 @@ size_flags_vertical = 4
 theme = SubResource("Theme_xqc0g")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ln73q")
 
-[node name="Label" type="Label" parent="ColorRect2"]
+[node name="Label" type="Label" parent="ColorRect2" unique_id=639704740]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
