@@ -21,6 +21,9 @@ public partial class DialogueManager : Node
     => _activeBubble != null
        && _activeBubble.IsInsideTree();
 
+    public bool IsMenuOpen { get; private set; }
+    public bool CanPlayDialogue => !IsMenuOpen;
+
     public override void _Ready()
     {
         Instance = this;
@@ -42,6 +45,9 @@ public partial class DialogueManager : Node
         DialoguePriority priority
     )
     {
+        if (!CanPlayDialogue)
+            return;
+
         if (IsDialogueActive)
         {
             if (priority < _currentPriority)
@@ -50,6 +56,7 @@ public partial class DialogueManager : Node
             }
 
             _activeBubble.QueueFree();
+            _activeBubble = null;
         }
 
         _activeBubble = _speechBubbleScene.Instantiate<SpeechBubble>();
@@ -63,15 +70,27 @@ public partial class DialogueManager : Node
             "timeout"
         );
 
+        if (!CanPlayDialogue)
+        {
+            StopActiveDialogue();
+            return;
+        }
+
         await TTSService.Instance.PlayAudio(
             language,
             text
         );
 
+        if (!CanPlayDialogue)
+        {
+            StopActiveDialogue();
+            return;
+        }
         await ToSignal(
             GetTree().CreateTimer(2.5f),
             "timeout"
         );
+
 
         if (_activeBubble != null)
         {
@@ -128,5 +147,28 @@ public partial class DialogueManager : Node
             finalText,
             priority
         );
+    }
+
+    public void SetMenuOpen(bool isOpen)
+    {
+        IsMenuOpen = isOpen;
+
+        if (IsMenuOpen)
+        {
+            StopActiveDialogue();
+        }
+    }
+
+    private void StopActiveDialogue()
+    {
+        if (_activeBubble != null)
+        {
+            _activeBubble.QueueFree();
+            _activeBubble = null;
+        }
+
+        // Optional:
+        // stop TTS audio immediately if your service supports it
+        TTSService.Instance.Stop();
     }
 }

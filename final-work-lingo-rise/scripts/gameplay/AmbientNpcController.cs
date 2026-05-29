@@ -48,6 +48,9 @@ public partial class AmbientNpcController : Area2D
             if (DialogueManager.Instance.IsDialogueActive)
                 continue;
 
+            if (!DialogueManager.Instance.CanPlayDialogue)
+                continue;
+
             await SpeakDialogue();
         }
     }

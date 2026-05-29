@@ -10,18 +10,56 @@ public partial class AudioManager : Node
     {
         Instance = this;
 
-        _player = new AudioStreamPlayer();
+        _player = new AudioStreamPlayer
+        {
+            Bus = "Voice"
+        };
 
         AddChild(_player);
     }
 
-    public void PlayWav(string path)
+    public AudioStreamPlayer PlayWav(string path)
     {
+        if (!FileAccess.FileExists(path))
+        {
+            GD.PrintErr(
+                $"Audio file missing: {path}"
+            );
+
+            return null;
+        }
+
         AudioStreamWav stream =
             AudioStreamWav.LoadFromFile(path);
 
-        _player.Stream = stream;
+        if (stream == null)
+        {
+            GD.PrintErr(
+                $"Failed to load WAV: {path}"
+            );
 
-        _player.Play();
+            return null;
+        }
+
+        AudioStreamPlayer player = new AudioStreamPlayer
+        {
+            Bus = "Voice"
+        };
+
+        AddChild(player);
+
+        player.Stream = stream;
+
+        player.Finished += () =>
+        {
+            if (IsInstanceValid(player))
+            {
+                player.QueueFree();
+            }
+        };
+
+        player.Play();
+
+        return player;
     }
 }
