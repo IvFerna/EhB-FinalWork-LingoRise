@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="FinalWork_LingoRise"
 run/main_scene="uid://cjf6upacpp1si"
-config/features=PackedStringArray("4.5", "C#", "Mobile")
+config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://assets/icon.svg"
 
 [autoload]
@@ -104,8 +108,12 @@ debug_lexicon_unlock_all={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=false
 
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+
+[tts]
+
+base_url="https://piper-tts-api.onrender.com"

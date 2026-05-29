@@ -27,3 +27,5 @@ custom_assets/
 /tools
 /node_modules
 /backend/src/storage/tts/*
+
+/android_exports
