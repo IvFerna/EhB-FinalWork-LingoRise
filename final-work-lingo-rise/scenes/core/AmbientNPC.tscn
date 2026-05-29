@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://37yqefg64t8x"]
+
+[ext_resource type="Script" uid="uid://ot46o7l8lt4" path="res://scripts/gameplay/AmbientNpcController.cs" id="1_t3tb3"]
+[ext_resource type="Texture2D" uid="uid://chel74oo28s36" path="res://assets/playerDummy.png" id="2_lg76h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y00di"]
+size = Vector2(179, 258.5)
+
+[node name="AmbientNpc" type="Area2D" unique_id=401412608]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_t3tb3")
+
+[node name="NpcSprite" type="Sprite2D" parent="." unique_id=1111478618]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_lg76h")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=214783832]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_y00di")
+
+[node name="BubbleAnchor" type="Marker2D" parent="." unique_id=172118597]
+position = Vector2(-62.499992, -92.500015)
+scale = Vector2(0.8, 0.8)
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 using Godot;
 
@@ -8,7 +9,8 @@ public partial class NpcController : Area2D
 
     private RequestSystem _requestSystem;
     private LexiconManager _wordSystem;
-
+    private DialogueManager _dialogueManager;
+    private Node2D _bubbleAnchor;
 
 
     public override async void _Ready()
@@ -18,6 +20,7 @@ public partial class NpcController : Area2D
         _requestSystem = GetNode<RequestSystem>("/root/RequestSystem");
 
         _wordSystem = GetNode<LexiconManager>("/root/LexiconManager");
+        _dialogueManager = GetNode<DialogueManager>("/root/DialogueManager");
 
 
         if (NpcData != null && NpcData.NpcTexture != null)
@@ -27,11 +30,9 @@ public partial class NpcController : Area2D
 
         await ToSignal(GetTree().CreateTimer(GreetingDelay), "timeout");
 
-        await DialogueManager.Instance.ShowDialogue(
-            GetNode<Node2D>("BubbleAnchor"),
-            "es",
-            NpcData.GreetingDialogue
-        );
+        _bubbleAnchor = GetNode<Node2D>("BubbleAnchor");
+
+        await _dialogueManager.ShowDialogueWithExposure(_bubbleAnchor, NpcData.GreetingDialogue, DialoguePriority.Gameplay);
     }
 
     public async void OnBodyEntered(Node body)
@@ -48,22 +49,17 @@ public partial class NpcController : Area2D
                 NpcData.DesiredItem
             );
 
-            GD.Print($"Registering exposure for {NpcData.DesiredItem.ForeignWord}");
+            GD.Print($"Registering exposure for {NpcData.DesiredItem.VocabularyEntry.ForeignWord}");
             GD.Print($"Desired item ID: {NpcData.DesiredItem.Id}");
             _wordSystem.RegisterExposure(
-                NpcData.DesiredItem.Id
+                NpcData.DesiredItem.VocabularyEntry.Id,
+                ExposureType.Heard
             );
 
-            string requestDialogue =
-            NpcData.RequestDialogue.Replace(
-                "{item}",
-                NpcData.DesiredItem.ForeignWord
-            );
-
-            await DialogueManager.Instance.ShowDialogue(
-                GetNode<Node2D>("BubbleAnchor"),
-                "es",
-                requestDialogue
+            await _dialogueManager.ShowDialogueWithExposure(
+                _bubbleAnchor,
+                NpcData.RequestDialogue,
+                DialoguePriority.Gameplay
             );
             return;
         }
@@ -82,29 +78,28 @@ public partial class NpcController : Area2D
             player.RemoveFromInventory(heldItem.Id);
 
             _wordSystem.RegisterExposure(
-                heldItem.Id
+                heldItem.VocabularyEntry.Id,
+                ExposureType.Interacted
             );
 
-            await DialogueManager.Instance.ShowDialogue(
-                GetNode<Node2D>("BubbleAnchor"),
-                "es",
-                NpcData.SuccessDialogue
+            await _dialogueManager.ShowDialogueWithExposure(
+                _bubbleAnchor,
+                NpcData.SuccessDialogue,
+                DialoguePriority.Gameplay
             );
 
             _requestSystem.CompleteRequest();
         }
         else
         {
-            string wrongDialogue =
-                NpcData.WrongItemDialogue.Replace(
-                    "{item}",
-                    heldItem.ForeignWord
-                );
-
-            await DialogueManager.Instance.ShowDialogue(
-                GetNode<Node2D>("BubbleAnchor"),
-                "es",
-                wrongDialogue
+            await _dialogueManager.ShowDialogueWithExposure(
+                _bubbleAnchor,
+                NpcData.WrongItemDialogue,
+                DialoguePriority.Gameplay,
+                new Dictionary<string, string>
+                {
+                    { "item", heldItem.VocabularyEntry.ForeignWord }
+                }
             );
         }
     }

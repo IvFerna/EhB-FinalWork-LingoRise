@@ -5,11 +5,11 @@ using System;
 public partial class NPC : Resource
 {
     [Export] public string NpcName { get; set; }
-    [Export] public string GreetingDialogue;
-    [Export] public string RequestDialogue;
-    [Export] public string WrongItemDialogue;
-    [Export] public string SuccessDialogue;
-    [Export] public string GoodbyeDialogue;
+    [Export] public DialogueData GreetingDialogue;
+    [Export] public DialogueData RequestDialogue;
+    [Export] public DialogueData WrongItemDialogue;
+    [Export] public DialogueData SuccessDialogue;
+    [Export] public DialogueData GoodbyeDialogue;
     [Export] public Texture2D NpcTexture { get; set; }
     [Export] public InventoryItem DesiredItem { get; set; }
 }

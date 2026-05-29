@@ -1,22 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7oovmhtlj7ac"]
+[gd_scene format=3 uid="uid://b7oovmhtlj7ac"]
 
 [ext_resource type="Script" uid="uid://x0def74o3xdb" path="res://scripts/gameplay/NpcController.cs" id="1_y00di"]
 [ext_resource type="Texture2D" uid="uid://chel74oo28s36" path="res://assets/playerDummy.png" id="2_y00di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y00di"]
-size = Vector2(179, 258.5)
+size = Vector2(227.50003, 293.75006)
 
-[node name="Npc" type="Area2D"]
+[node name="NPC" type="Area2D" unique_id=1971382674]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_y00di")
 
-[node name="NpcSprite" type="Sprite2D" parent="."]
+[node name="NpcSprite" type="Sprite2D" parent="." unique_id=51444238]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_y00di")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.75)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=646526378]
+scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_y00di")
 
-[node name="BubbleAnchor" type="Marker2D" parent="."]
-position = Vector2(-104, -132)
+[node name="BubbleAnchor" type="Marker2D" parent="." unique_id=1655618167]
+position = Vector2(-76.25, -95)
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
