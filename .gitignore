@@ -17,6 +17,7 @@ mono_crash.*.json
 
 # Backup files
 *~
+*.csproj.old
 
 # Ignore .import files
 *.import
