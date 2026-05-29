@@ -5,12 +5,11 @@ const sanitize = require("sanitize-filename");
 
 const STORAGE_PATH = path.join(__dirname, "../../storage/tts");
 
-// const PIPER_PATH = path.join(__dirname, "../../../../tools/piper/piper.exe");
-const PIPER_PATH = process.env.PIPER_PATH || path.join(__dirname, "../../../../tools/piper/piper");
+const PIPER_PATH = process.env.PIPER_PATH || path.join(process.cwd(), "tools/piper/piper");
 
 const MODEL_PATH =
-	process.env.PIPER_MODEL_PATH ||
-	path.join(__dirname, "../../../../tools/piper/models/es_ES-sharvard-medium.onnx");
+	process.env.MODEL_PATH ||
+	path.join(process.cwd(), "tools/piper/models/es_ES-sharvard-medium.onnx");
 
 function normalizeText(text) {
 	return sanitize(
