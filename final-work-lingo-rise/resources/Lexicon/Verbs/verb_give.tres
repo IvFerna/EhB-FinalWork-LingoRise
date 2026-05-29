@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="LexiconEntry" load_steps=2 format=3 uid="uid://c6a4e0kqmq14t"]
+[gd_resource type="Resource" script_class="LexiconEntry" format=3 uid="uid://c6a4e0kqmq14t"]
 
 [ext_resource type="Script" uid="uid://dvokk5xg60ff" path="res://scripts/systems/lexicon/LexiconEntry.cs" id="1_prhev"]
 
 [resource]
 script = ExtResource("1_prhev")
-Id = "give"
+Id = "verb_give"
 ForeignWord = "Dar"
 NativeTranslation = "Geven"
 Category = 2

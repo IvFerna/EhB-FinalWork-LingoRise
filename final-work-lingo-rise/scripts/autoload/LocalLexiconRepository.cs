@@ -13,14 +13,28 @@ public partial class LocalLexiconRepository : Node, ILexiconRepository
 
     private void LoadEntries()
     {
-        LoadResourcesFromFolder("res://Resources/Items/");
-        LoadResourcesFromFolder("res://Resources/Lexicon/Verbs/");
+        var database = GD.Load<LexiconDatabase>(
+            "res://resources/Lexicon/LexiconDatabase.tres");
 
+        if (database == null)
+        {
+            GD.PrintErr("Failed to load lexicon database.");
+            return;
+        }
 
+        foreach (var resource in database.Entries)
+        {
+            if (resource is ILexiconEntry entry &&
+                !string.IsNullOrEmpty(entry.Id))
+            {
+                _entries[entry.Id] = entry;
+            }
+        }
 
         GD.Print("=== LEXICON REPOSITORY ===");
 
         GD.Print($"Loaded {_entries.Count} lexicon entries.");
+
         foreach (var entry in _entries.Values)
         {
             GD.Print(
@@ -33,43 +47,43 @@ public partial class LocalLexiconRepository : Node, ILexiconRepository
         GD.Print("==========================");
     }
 
-    private void LoadResourcesFromFolder(string path)
-    {
-        var dir = DirAccess.Open(path);
+    // private void LoadResourcesFromFolder(string path)
+    // {
+    //     var dir = DirAccess.Open(path);
 
-        if (dir == null)
-            return;
+    //     if (dir == null)
+    //         return;
 
-        dir.ListDirBegin();
+    //     dir.ListDirBegin();
 
-        while (true)
-        {
-            var fileName = dir.GetNext();
+    //     while (true)
+    //     {
+    //         var fileName = dir.GetNext();
 
-            // GD.Print($"Found file: {fileName} in {path}");
-            if (string.IsNullOrEmpty(fileName))
-                break;
+    //         // GD.Print($"Found file: {fileName} in {path}");
+    //         if (string.IsNullOrEmpty(fileName))
+    //             break;
 
-            if (dir.CurrentIsDir())
-                continue;
+    //         if (dir.CurrentIsDir())
+    //             continue;
 
-            if (!fileName.EndsWith(".tres"))
-                continue;
+    //         if (!fileName.EndsWith(".tres"))
+    //             continue;
 
-            var fullPath = path + fileName;
+    //         var fullPath = path + fileName;
 
-            var resource = ResourceLoader.Load<Resource>(fullPath);
-            GD.Print($"Loaded resource: {fullPath} | Type: {resource.GetType()}");
+    //         var resource = ResourceLoader.Load<Resource>(fullPath);
+    //         GD.Print($"Loaded resource: {fullPath} | Type: {resource.GetType()}");
 
-            if (resource is ILexiconEntry entry && !string.IsNullOrEmpty(entry.Id))
-            {
-                _entries[entry.Id] = entry;
-            }
-        }
+    //         if (resource is ILexiconEntry entry && !string.IsNullOrEmpty(entry.Id))
+    //         {
+    //             _entries[entry.Id] = entry;
+    //         }
+    //     }
 
 
-        dir.ListDirEnd();
-    }
+    //     dir.ListDirEnd();
+    // }
 
     public ILexiconEntry GetById(string id)
     {

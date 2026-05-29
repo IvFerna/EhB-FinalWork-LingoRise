@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LexiconDatabase" format=3 uid="uid://bnc8v0r4m5wx5"]
+
+[ext_resource type="Script" uid="uid://diela2kif75ce" path="res://scripts/systems/lexicon/LexiconDatabase.cs" id="1_1qgih"]
+[ext_resource type="Resource" uid="uid://b3y8ny7xlgn8h" path="res://resources/Lexicon/Adjectives/adj_fresh.tres" id="1_eklbx"]
+[ext_resource type="Resource" uid="uid://dpn6j7lxmptfs" path="res://resources/Lexicon/Nouns/noun_bread.tres" id="2_sxpbw"]
+[ext_resource type="Resource" uid="uid://bk2v2ps5nwo4t" path="res://resources/Lexicon/Nouns/noun_cake.tres" id="3_3bexi"]
+[ext_resource type="Resource" uid="uid://xhxjte0qc6uy" path="res://resources/Lexicon/Nouns/noun_donut.tres" id="4_uc8tw"]
+[ext_resource type="Resource" uid="uid://dcqrxk1ov8e0r" path="res://resources/Lexicon/Nouns/noun_milk.tres" id="5_45tre"]
+[ext_resource type="Resource" uid="uid://bapxa2s31es1x" path="res://resources/Lexicon/Verbs/verb_bring.tres" id="6_8vgod"]
+[ext_resource type="Resource" uid="uid://6x2eqi37nen6" path="res://resources/Lexicon/Verbs/verb_buy.tres" id="7_eebir"]
+[ext_resource type="Resource" uid="uid://c6a4e0kqmq14t" path="res://resources/Lexicon/Verbs/verb_give.tres" id="8_hd3k8"]
+
+[resource]
+script = ExtResource("1_1qgih")
+Entries = Array[Resource]([ExtResource("1_eklbx"), ExtResource("2_sxpbw"), ExtResource("3_3bexi"), ExtResource("4_uc8tw"), ExtResource("5_45tre"), ExtResource("6_8vgod"), ExtResource("7_eebir"), ExtResource("8_hd3k8")])
+metadata/_custom_type_script = "uid://diela2kif75ce"

@@ -2,11 +2,19 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+
+public enum ExposureType
+{
+    Heard,
+    Seen,
+    Interacted
+}
 
 public partial class LexiconManager : Node
 {
     private const int UnlockThreshold = 3;
-    private Dictionary<string, int> _wordExposure = new();
+    private Dictionary<string, WordProgressData> _wordProgress = new();
     private HashSet<string> _unlockedWords = new();
     private ILexiconRepository _repository;
 
@@ -18,25 +26,50 @@ public partial class LexiconManager : Node
         LoadProgress();
 
         _repository = GetNode<LocalLexiconRepository>("/root/LocalLexiconRepository");
+        
     }
 
-    public void RegisterExposure(string wordId)
+    public void RegisterExposure(
+        string wordId,
+        ExposureType type
+    )
     {
         if (string.IsNullOrEmpty(wordId))
             return;
 
-        if (!_wordExposure.ContainsKey(wordId))
-            _wordExposure[wordId] = 0;
+        if (!_wordProgress.ContainsKey(wordId))
+        {
+            _wordProgress[wordId] =
+                new WordProgressData();
+        }
 
-        _wordExposure[wordId]++;
+        var progress = _wordProgress[wordId];
+
+
+
+        switch (type)
+        {
+            case ExposureType.Heard:
+                progress.HeardCount++;
+                break;
+
+            case ExposureType.Seen:
+                progress.SeenCount++;
+                break;
+
+            case ExposureType.Interacted:
+                progress.InteractionCount++;
+                break;
+        }
+
+        CheckUnlock(wordId);
 
         SaveProgress();
-        CheckUnlock(wordId);
     }
 
     private void CheckUnlock(string wordId)
     {
-        if (_wordExposure[wordId] >= UnlockThreshold &&
+        if (_wordProgress[wordId].TotalExposureCount >= UnlockThreshold &&
             !_unlockedWords.Contains(wordId))
         {
             UnlockWord(wordId);
@@ -47,9 +80,16 @@ public partial class LexiconManager : Node
     {
         if (_unlockedWords.Add(wordId))
         {
+            if (_wordProgress.ContainsKey(wordId))
+            {
+                _wordProgress[wordId].IsUnlocked = true;
+            }
+
             SaveProgress();
+
             OnWordUnlocked?.Invoke(wordId);
             OnLexiconUpdated?.Invoke();
+
             GD.Print($"Unlocked word: {wordId}");
         }
     }
@@ -61,7 +101,7 @@ public partial class LexiconManager : Node
 
     public int GetExposureCount(string wordId)
     {
-        return _wordExposure.GetValueOrDefault(wordId, 0);
+        return _wordProgress.GetValueOrDefault(wordId, new WordProgressData()).TotalExposureCount;
     }
 
     public IReadOnlyCollection<string> GetUnlockedWords()
@@ -69,52 +109,64 @@ public partial class LexiconManager : Node
         return _unlockedWords;
     }
 
-    private const string SavePath = "user://lexicon_save.tres";
+    private const string SavePath = "user://lexicon_save.json";
     public void SaveProgress()
     {
-        var saveData = new LexiconSaveData();
-
-        foreach (var entry in _wordExposure)
+        var saveData = new LexiconSaveData
         {
-            saveData.WordExposure[entry.Key] = entry.Value;
-        }
+            WordProgress = _wordProgress,
+            UnlockedWords = _unlockedWords.ToList()
+        };
 
-        foreach (var wordId in _unlockedWords)
-        {
-            saveData.UnlockedWords.Add(wordId);
-        }
+        string json = JsonSerializer.Serialize(
+            saveData,
+            new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
 
-        ResourceSaver.Save(saveData, SavePath);
+        using var file = FileAccess.Open(
+            SavePath,
+            FileAccess.ModeFlags.Write);
+
+        file.StoreString(json);
+
+        GD.Print("Lexicon progress saved.");
     }
 
     public void LoadProgress()
     {
-        if (!ResourceLoader.Exists(SavePath))
+        if (!FileAccess.FileExists(SavePath))
+        {
+            GD.Print("No lexicon save found.");
             return;
+        }
 
-        var saveData = ResourceLoader.Load<LexiconSaveData>(SavePath);
+        using var file = FileAccess.Open(
+            SavePath,
+            FileAccess.ModeFlags.Read);
+
+        string json = file.GetAsText();
+
+        var saveData = JsonSerializer.Deserialize<LexiconSaveData>(json);
 
         if (saveData == null)
+        {
+            GD.PrintErr("Failed to deserialize lexicon save.");
             return;
-
-        _wordExposure.Clear();
-        _unlockedWords.Clear();
-
-        foreach (var entry in saveData.WordExposure)
-        {
-            _wordExposure[entry.Key.ToString()] = entry.Value;
         }
 
-        foreach (string wordId in saveData.UnlockedWords)
-        {
-            _unlockedWords.Add(wordId);
-        }
+        _wordProgress = saveData.WordProgress ?? new();
+        _unlockedWords = saveData.UnlockedWords != null
+            ? new HashSet<string>(saveData.UnlockedWords)
+            : new HashSet<string>();
 
         GD.Print("=== LEXICON SAVE DATA ===");
 
-        foreach (var exposure in _wordExposure)
+        foreach (var progress in _wordProgress)
         {
-            GD.Print($"Exposure: {exposure.Key} = {exposure.Value}");
+            GD.Print(
+                $"Progress: {progress.Key} = {progress.Value.TotalExposureCount}");
         }
 
         foreach (var unlocked in _unlockedWords)
@@ -127,12 +179,12 @@ public partial class LexiconManager : Node
 
     public void ResetProgress()
     {
-        _wordExposure.Clear();
+        _wordProgress.Clear();
         _unlockedWords.Clear();
 
-        if (ResourceLoader.Exists(SavePath))
+        if (FileAccess.FileExists(SavePath))
         {
-            DirAccess.RemoveAbsolute(SavePath);
+            DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(SavePath));
         }
         OnLexiconUpdated?.Invoke();
     }
@@ -148,9 +200,9 @@ public partial class LexiconManager : Node
 
         GD.Print("-- Exposure --");
 
-        foreach (var entry in _wordExposure)
+        foreach (var entry in _wordProgress)
         {
-            GD.Print($"{entry.Key}: {entry.Value}");
+            GD.Print($"{entry.Key}: {entry.Value.TotalExposureCount}");
         }
 
         GD.Print("-- Unlocked --");
@@ -214,9 +266,9 @@ public partial class LexiconManager : Node
         {
             _unlockedWords.Add(entry.Id);
 
-            if (!_wordExposure.ContainsKey(entry.Id))
+            if (!_wordProgress.ContainsKey(entry.Id))
             {
-                _wordExposure[entry.Id] = UnlockThreshold;
+                _wordProgress[entry.Id] = new WordProgressData();
             }
         }
         OnLexiconUpdated?.Invoke();

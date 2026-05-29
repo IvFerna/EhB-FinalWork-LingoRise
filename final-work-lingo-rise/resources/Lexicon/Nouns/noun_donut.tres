@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LexiconEntry" format=3 uid="uid://xhxjte0qc6uy"]
+
+[ext_resource type="Script" uid="uid://dvokk5xg60ff" path="res://scripts/systems/lexicon/LexiconEntry.cs" id="1_1g8s1"]
+
+[resource]
+script = ExtResource("1_1g8s1")
+Id = "noun_donut"
+ForeignWord = "Dona"
+NativeTranslation = "Donut"
+metadata/_custom_type_script = "uid://dvokk5xg60ff"

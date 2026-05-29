@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LexiconEntry" format=3 uid="uid://b3y8ny7xlgn8h"]
+
+[ext_resource type="Script" uid="uid://dvokk5xg60ff" path="res://scripts/systems/lexicon/LexiconEntry.cs" id="1_uv72o"]
+
+[resource]
+script = ExtResource("1_uv72o")
+Id = "adj_fresh"
+ForeignWord = "Fresco"
+NativeTranslation = "Vers"
+Category = 1
+metadata/_custom_type_script = "uid://dvokk5xg60ff"

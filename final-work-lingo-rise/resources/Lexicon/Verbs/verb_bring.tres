@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="LexiconEntry" load_steps=2 format=3 uid="uid://bapxa2s31es1x"]
+[gd_resource type="Resource" script_class="LexiconEntry" format=3 uid="uid://bapxa2s31es1x"]
 
 [ext_resource type="Script" uid="uid://dvokk5xg60ff" path="res://scripts/systems/lexicon/LexiconEntry.cs" id="1_2r1v3"]
 
 [resource]
 script = ExtResource("1_2r1v3")
-Id = "bring"
+Id = "verb_bring"
 ForeignWord = "Traer"
-NativeTranslation = "Breng"
+NativeTranslation = "Brengen"
 Category = 2
 metadata/_custom_type_script = "uid://dvokk5xg60ff"
