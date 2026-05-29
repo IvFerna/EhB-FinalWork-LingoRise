@@ -102,4 +102,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Button2" type="Button" parent="." unique_id=102979303]
+layout_mode = 1
+offset_right = 140.0
+offset_bottom = 118.0
+size_flags_horizontal = 8
+text = "Go Back"
+
 [connection signal="pressed" from="Button" to="." method="OnClosePressed"]
+[connection signal="pressed" from="Button2" to="." method="onBackPressed"]

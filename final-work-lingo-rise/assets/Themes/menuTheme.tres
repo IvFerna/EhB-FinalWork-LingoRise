@@ -1,6 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://cmmyssjsx62a4"]
 
 [ext_resource type="FontFile" uid="uid://bjq3ammn2qioh" path="res://assets/Fonts/Poppins-Medium.ttf" id="1_i153n"]
+[ext_resource type="FontFile" uid="uid://qo5q46i02mub" path="res://assets/Fonts/Poppins-Regular.ttf" id="2_utqgj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwbf0"]
 content_margin_left = 10.0
@@ -68,6 +69,12 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utqgj"]
 bg_color = Color(0.03529412, 0.53333336, 0.5647059, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwshh"]
+bg_color = Color(0.68235296, 0.62352943, 0.46666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeli2"]
+bg_color = Color(0.56078434, 0.50980395, 0.37254903, 1)
+
 [resource]
 Button/colors/font_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
 Button/colors/font_focus_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
@@ -87,3 +94,9 @@ Button/styles/normal = SubResource("StyleBoxFlat_bhu4a")
 Button/styles/pressed = SubResource("StyleBoxFlat_e2per")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_i153n")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_utqgj")
+PopupMenu/colors/font_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
+PopupMenu/colors/font_hover_color = Color(0.03529412, 0.53333336, 0.5647059, 1)
+PopupMenu/font_sizes/font_size = 24
+PopupMenu/fonts/font = ExtResource("2_utqgj")
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_pwshh")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_yeli2")

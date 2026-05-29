@@ -18,4 +18,10 @@ public partial class LexiconMenu : Control
     {
         UIManager.Instance.CloseAllMenus();
     }
+
+    private void onBackPressed()
+    {
+        UIManager.Instance.CloseCurrentSubmenu(this);
+    }
+
 }

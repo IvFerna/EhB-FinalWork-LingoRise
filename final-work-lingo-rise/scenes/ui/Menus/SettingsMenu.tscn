@@ -1,13 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://58ah7jpm007i"]
+[gd_scene format=3 uid="uid://58ah7jpm007i"]
 
 [ext_resource type="Script" uid="uid://qcyxjls16e4d" path="res://scripts/ui/SettingsMenu.cs" id="1_ibge6"]
 [ext_resource type="Theme" uid="uid://cmmyssjsx62a4" path="res://assets/Themes/menuTheme.tres" id="2_dyeuv"]
 [ext_resource type="FontFile" uid="uid://bv6svs635fubm" path="res://assets/Fonts/CinzelDecorative-Bold.ttf" id="2_mdwsd"]
 [ext_resource type="FontFile" uid="uid://qo5q46i02mub" path="res://assets/Fonts/Poppins-Regular.ttf" id="2_plqlb"]
+[ext_resource type="Texture2D" uid="uid://govv58y1cq2u" path="res://assets/Icons/Icon_cross.png" id="2_vtuuc"]
 [ext_resource type="Texture2D" uid="uid://dtdx2olejbldm" path="res://assets/Icons/Icon_MasterVolume.png" id="4_e6rp2"]
 [ext_resource type="Texture2D" uid="uid://dg1jwacjqu616" path="res://assets/Icons/Icon_MusicVolume.png" id="5_vtuuc"]
 [ext_resource type="Texture2D" uid="uid://c1m5ok2uxfyjk" path="res://assets/Icons/Icon_Vibrate.png" id="6_2bagr"]
 [ext_resource type="Texture2D" uid="uid://dmboo1whgqjyi" path="res://assets/Icons/Icon_bell.png" id="7_q2fi8"]
+[ext_resource type="Texture2D" uid="uid://bnkpihl5yfq5a" path="res://assets/icon.svg" id="9_2bagr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crwwp"]
 bg_color = Color(0.68235296, 0.62352943, 0.46666667, 1)
@@ -18,7 +20,12 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_dyeuv"]
 font = ExtResource("2_plqlb")
-font_size = 24
+font_size = 32
+font_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2bagr"]
+font = ExtResource("2_plqlb")
+font_size = 32
 font_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
 
 [sub_resource type="Theme" id="Theme_plqlb"]
@@ -35,7 +42,7 @@ font = ExtResource("2_mdwsd")
 font_size = 48
 font_color = Color(0.93333334, 0.84313726, 0.49803922, 1)
 
-[node name="SettingsMenu" type="Control"]
+[node name="SettingsMenu" type="Control" unique_id=603313726 node_paths=PackedStringArray("_masterSlider", "_musicSlider", "_voiceSlider", "_masterIcon", "_musicIcon", "_voiceIcon")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,8 +50,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ibge6")
+_masterSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/MasterVolumeContainer/HSlider")
+_musicSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/MusicVolumeContainer/HSlider")
+_voiceSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/VoiceVolumeContainer/HSlider")
+_masterIcon = NodePath("PanelContainer/MarginContainer/VBoxContainer/MasterVolumeContainer/TextureRect")
+_musicIcon = NodePath("PanelContainer/MarginContainer/VBoxContainer/MusicVolumeContainer/TextureRect")
+_voiceIcon = NodePath("PanelContainer/MarginContainer/VBoxContainer/VoiceVolumeContainer/TextureRect")
+_muteIcon = ExtResource("2_vtuuc")
+_lowIcon = ExtResource("7_q2fi8")
+_highIcon = ExtResource("4_e6rp2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=783731973]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.03529412, 0.53333336, 0.5647059, 1)
 
-[node name="CloseButton" type="Button" parent="."]
+[node name="CloseButton" type="Button" parent="." unique_id=580477615]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -65,40 +81,46 @@ offset_bottom = 139.0
 grow_horizontal = 0
 text = "Close"
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 156.0
-offset_top = 597.0
-offset_right = 924.0
-offset_bottom = 1155.0
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=632134178]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -442.0
+offset_right = 384.0
+offset_bottom = 442.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_crwwp")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=945835852]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1446450777]
 custom_minimum_size = Vector2(600, 500)
 layout_mode = 2
 theme = ExtResource("2_dyeuv")
 theme_override_constants/separation = 60
-alignment = 1
 
-[node name="VolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=988650775]
 layout_mode = 2
 text = "Volume"
 label_settings = SubResource("LabelSettings_dyeuv")
 horizontal_alignment = 1
 
-[node name="MasterVolumeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=305066742]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MasterVolumeContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MasterVolumeContainer" unique_id=1372503312]
 layout_mode = 2
 texture = ExtResource("4_e6rp2")
 
-[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MasterVolumeContainer"]
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MasterVolumeContainer" unique_id=1772173557]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -106,43 +128,123 @@ theme = ExtResource("2_dyeuv")
 value = 50.0
 tick_count = 5
 
-[node name="MusicVolumeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2026515247]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MusicVolumeContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MusicVolumeContainer" unique_id=459699976]
 layout_mode = 2
 texture = ExtResource("5_vtuuc")
 
-[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MusicVolumeContainer"]
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MusicVolumeContainer" unique_id=271817625]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 value = 50.0
 tick_count = 5
 
-[node name="VibrateRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VoiceVolumeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=387940521]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/VoiceVolumeContainer" unique_id=487118051]
+layout_mode = 2
+texture = ExtResource("5_vtuuc")
+
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/VoiceVolumeContainer" unique_id=623412277]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 50.0
+tick_count = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1567566458]
+layout_mode = 2
+theme_override_constants/separation = 69
+alignment = 1
+
+[node name="VibrateRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1836200333]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/VibrateRow"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VibrateRow" unique_id=1645010832]
 layout_mode = 2
 texture = ExtResource("6_2bagr")
 
-[node name="CheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/VibrateRow"]
+[node name="CheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VibrateRow" unique_id=573548746]
 layout_mode = 2
 
-[node name="ReminderRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ReminderRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=428350118]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ReminderRow"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ReminderRow" unique_id=572853310]
 layout_mode = 2
 texture = ExtResource("7_q2fi8")
 
-[node name="CheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/ReminderRow"]
+[node name="CheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ReminderRow" unique_id=1269046142]
 layout_mode = 2
 
-[node name="ColorRect2" type="PanelContainer" parent="."]
+[node name="LanguageRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1404100200]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LanguageRow" unique_id=164795327]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_2bagr")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LanguageRow" unique_id=960981988]
+layout_mode = 2
+text = "Native Language: "
+label_settings = SubResource("LabelSettings_2bagr")
+
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/LanguageRow" unique_id=297824084]
+layout_mode = 2
+theme = ExtResource("2_dyeuv")
+selected = 1
+item_count = 5
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Nederlands"
+popup/item_1/id = 1
+popup/item_2/text = "Français"
+popup/item_2/id = 2
+popup/item_3/text = "Español"
+popup/item_3/id = 3
+popup/item_4/text = "Deutsch"
+popup/item_4/id = 4
+
+[node name="LanguageRow2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=605258204]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LanguageRow2" unique_id=415323054]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_2bagr")
+expand_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LanguageRow2" unique_id=45303286]
+layout_mode = 2
+text = "Target Language: "
+label_settings = SubResource("LabelSettings_2bagr")
+
+[node name="OptionButton2" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/LanguageRow2" unique_id=812653380]
+layout_mode = 2
+selected = 3
+item_count = 5
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Nederlands"
+popup/item_1/id = 1
+popup/item_2/text = "Français"
+popup/item_2/id = 2
+popup/item_3/text = "Español"
+popup/item_3/id = 3
+popup/item_4/text = "Deutsch"
+popup/item_4/id = 4
+
+[node name="ColorRect2" type="PanelContainer" parent="." unique_id=261244708]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.27125925
@@ -159,7 +261,7 @@ size_flags_vertical = 4
 theme = SubResource("Theme_plqlb")
 theme_override_styles/panel = SubResource("StyleBoxFlat_dyeuv")
 
-[node name="Label" type="Label" parent="ColorRect2"]
+[node name="Label" type="Label" parent="ColorRect2" unique_id=1595269198]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
@@ -169,4 +271,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Button" type="Button" parent="." unique_id=227284645]
+layout_mode = 1
+offset_right = 140.0
+offset_bottom = 118.0
+size_flags_horizontal = 8
+text = "Go Back"
+
 [connection signal="pressed" from="CloseButton" to="." method="OnClosePressed"]
+[connection signal="pressed" from="Button" to="." method="onBackPressed"]

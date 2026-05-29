@@ -19,18 +19,21 @@ public partial class UIManager : CanvasLayer
     {
         GD.Print("Toggling Main Menu: " + !_mainMenu.Visible);
         _mainMenu.Visible = !_mainMenu.Visible;
+        DialogueManager.Instance.SetMenuOpen(_mainMenu.Visible);
     }
 
     public void OpenLexicon()
     {
         CloseAllMenus();
         _lexiconMenu.Visible = true;
+        DialogueManager.Instance.SetMenuOpen(true);
     }
 
     public void OpenSettings()
     {
         CloseAllMenus();
         _settingsMenu.Visible = true;
+        DialogueManager.Instance.SetMenuOpen(true);
     }
 
     public void CloseAllMenus()
@@ -39,5 +42,13 @@ public partial class UIManager : CanvasLayer
         _mainMenu.Visible = false;
         _settingsMenu.Visible = false;
         _lexiconMenu.Visible = false;
+        DialogueManager.Instance.SetMenuOpen(false);
+    }
+
+    public void CloseCurrentSubmenu(Control menu)
+    {
+        menu.Visible = false;
+        _mainMenu.Visible = true;
+        DialogueManager.Instance.SetMenuOpen(true);
     }
 }
