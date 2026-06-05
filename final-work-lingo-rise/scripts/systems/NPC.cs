@@ -10,6 +10,7 @@ public partial class NPC : Resource
     [Export] public DialogueData WrongItemDialogue;
     [Export] public DialogueData SuccessDialogue;
     [Export] public DialogueData GoodbyeDialogue;
+    [Export] public DialogueData CompletionDialogue;
     [Export] public Texture2D NpcTexture { get; set; }
     [Export] public InventoryItem DesiredItem { get; set; }
 }
