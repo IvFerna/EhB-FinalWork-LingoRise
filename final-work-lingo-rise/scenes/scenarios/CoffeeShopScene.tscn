@@ -1,0 +1,233 @@
+[gd_scene format=4 uid="uid://bsyfcdvyyheug"]
+
+[ext_resource type="Script" uid="uid://vnimuij17neb" path="res://scripts/core/CoffeeShopScene.cs" id="1_8vnoi"]
+[ext_resource type="TileSet" uid="uid://dqm10mw5fh78u" path="res://assets/Tilesets/CustomTileset.tres" id="1_pc63w"]
+[ext_resource type="PackedScene" uid="uid://b7oovmhtlj7ac" path="res://scenes/core/NPC.tscn" id="2_h2dh3"]
+[ext_resource type="Script" uid="uid://dvokk5xg60ff" path="res://scripts/systems/lexicon/LexiconEntry.cs" id="3_pc63w"]
+[ext_resource type="Script" uid="uid://b8g31xwf5md62" path="res://scripts/utilities/DialogueData.cs" id="4_a7diy"]
+[ext_resource type="Script" uid="uid://bselwqanjsww6" path="res://scripts/gameplay/NPC/CustomerNpc.cs" id="4_dkqvl"]
+[ext_resource type="Script" uid="uid://4wy848rg8kuj" path="res://scripts/systems/NPC.cs" id="5_7b6r1"]
+[ext_resource type="Texture2D" uid="uid://dcbnrqea70qme" path="res://assets/Characters/NPCFront.png" id="5_h85b0"]
+[ext_resource type="PackedScene" uid="uid://bids0kc1i5ani" path="res://scenes/core/Item.tscn" id="6_8q3oc"]
+[ext_resource type="Resource" uid="uid://dcqrxk1ov8e0r" path="res://resources/Lexicon/Nouns/noun_milk.tres" id="6_tln0d"]
+[ext_resource type="Resource" uid="uid://qpufgs5sjqa2" path="res://resources/Lexicon/Nouns/noun_tea.tres" id="7_dkqvl"]
+[ext_resource type="Resource" uid="uid://m1s7kpfjyc8u" path="res://resources/items/milk.tres" id="7_og5b5"]
+[ext_resource type="Resource" uid="uid://hts7l7300bxq" path="res://resources/items/coffee.tres" id="8_8vnoi"]
+[ext_resource type="Resource" uid="uid://cf6o51o6qo8m5" path="res://resources/items/tea.tres" id="9_og5b5"]
+[ext_resource type="Resource" uid="uid://brfcwbppyhfnd" path="res://resources/Lexicon/Nouns/noun_coffee.tres" id="11_cmkab"]
+[ext_resource type="Texture2D" uid="uid://cpecvxwobxxgq" path="res://assets/Characters/BaristaFront.png" id="12_g1y3f"]
+[ext_resource type="Script" uid="uid://1auwjao68veg" path="res://scripts/gameplay/NPC/QuestNpc.cs" id="16_cmkab"]
+
+[sub_resource type="Resource" id="Resource_rruwe"]
+script = ExtResource("3_pc63w")
+Id = "verb_drink"
+ForeignWord = "Beber"
+NativeTranslation = "Drinken"
+Category = 2
+metadata/_custom_type_script = "uid://dvokk5xg60ff"
+
+[sub_resource type="Resource" id="Resource_g1y3f"]
+script = ExtResource("4_a7diy")
+Text = "Me gustaria beber un te."
+ExposedWords = Array[ExtResource("3_pc63w")]([ExtResource("7_dkqvl"), SubResource("Resource_rruwe")])
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_g4hw1"]
+script = ExtResource("4_a7diy")
+Text = "Gracias!"
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_tln0d"]
+script = ExtResource("4_a7diy")
+Text = "Eso no es lo que pedi..."
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_og5b5"]
+script = ExtResource("5_7b6r1")
+NpcName = "Customer1"
+RequestDialogue = SubResource("Resource_g1y3f")
+WrongItemDialogue = SubResource("Resource_tln0d")
+SuccessDialogue = SubResource("Resource_g4hw1")
+NpcTexture = ExtResource("5_h85b0")
+DesiredItem = ExtResource("9_og5b5")
+metadata/_custom_type_script = "uid://4wy848rg8kuj"
+
+[sub_resource type="Resource" id="Resource_l7skk"]
+script = ExtResource("3_pc63w")
+Id = "verb_tomar"
+ForeignWord = "Tomar"
+NativeTranslation = "nemen"
+Category = 2
+metadata/_custom_type_script = "uid://dvokk5xg60ff"
+
+[sub_resource type="Resource" id="Resource_x436d"]
+script = ExtResource("4_a7diy")
+Text = "Me gustaria tomar cafe. "
+ExposedWords = Array[ExtResource("3_pc63w")]([ExtResource("11_cmkab"), SubResource("Resource_l7skk")])
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_dkqvl"]
+script = ExtResource("4_a7diy")
+Text = "Gracias"
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_86s3m"]
+script = ExtResource("4_a7diy")
+Text = "Eso no es lo que pedi."
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_1ynou"]
+script = ExtResource("5_7b6r1")
+NpcName = "Customer2"
+RequestDialogue = SubResource("Resource_x436d")
+WrongItemDialogue = SubResource("Resource_86s3m")
+SuccessDialogue = SubResource("Resource_dkqvl")
+NpcTexture = ExtResource("5_h85b0")
+DesiredItem = ExtResource("8_8vnoi")
+metadata/_custom_type_script = "uid://4wy848rg8kuj"
+
+[sub_resource type="Resource" id="Resource_nfb86"]
+script = ExtResource("3_pc63w")
+Id = "verb_give"
+ForeignWord = "Dar"
+NativeTranslation = "Geven"
+Category = 2
+metadata/_custom_type_script = "uid://dvokk5xg60ff"
+
+[sub_resource type="Resource" id="Resource_d0to0"]
+script = ExtResource("4_a7diy")
+Text = "¿Me podrias dar leche?"
+ExposedWords = Array[ExtResource("3_pc63w")]([ExtResource("6_tln0d"), SubResource("Resource_nfb86")])
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_oxjes"]
+script = ExtResource("4_a7diy")
+Text = "Gracias."
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_xmdu3"]
+script = ExtResource("4_a7diy")
+Text = "Eso no es lo que pedi..."
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_1uikg"]
+script = ExtResource("5_7b6r1")
+NpcName = "Customer3"
+RequestDialogue = SubResource("Resource_d0to0")
+WrongItemDialogue = SubResource("Resource_xmdu3")
+SuccessDialogue = SubResource("Resource_oxjes")
+NpcTexture = ExtResource("5_h85b0")
+DesiredItem = ExtResource("7_og5b5")
+metadata/_custom_type_script = "uid://4wy848rg8kuj"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tln0d"]
+size = Vector2(233.5, 551)
+
+[sub_resource type="Resource" id="Resource_cmkab"]
+script = ExtResource("4_a7diy")
+Text = "Great work! The customers are happy."
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_udmgn"]
+script = ExtResource("4_a7diy")
+Text = "Ayuda servir los clientes."
+metadata/_custom_type_script = "uid://b8g31xwf5md62"
+
+[sub_resource type="Resource" id="Resource_h85b0"]
+script = ExtResource("5_7b6r1")
+NpcName = "Barista"
+GreetingDialogue = SubResource("Resource_udmgn")
+CompletionDialogue = SubResource("Resource_cmkab")
+NpcTexture = ExtResource("12_g1y3f")
+metadata/_custom_type_script = "uid://4wy848rg8kuj"
+
+[node name="CoffeeShopScene" type="Control" unique_id=1169370496 node_paths=PackedStringArray("playerSpawnPoint", "barista")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8vnoi")
+playerSpawnPoint = NodePath("PlayerSpawn")
+barista = NodePath("NPC4")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1657765227]
+tile_map_data = PackedByteArray("AAAAAAMAAQAFAAYAAAAAAAQAAQAFAAYAAAAAAAUAAQAFAAcAAAAAAAYAAQACAAAAAAAAAAcAAQACAAAAAAAAAAgAAQACAAAAAAAAAAkAAQACAAAAAAAAAAoAAQACAAAAAAAAAAsAAQACAAAAAAAAAAwAAQACAAAAAAAAAA0AAQACAAAAAAAAAA4AAQACAAAAAAAAAA8AAQACAAAAAAAAABAAAQACAAAAAAAAABEAAQACAAAAAAAAABIAAQACAAAAAAAAABMAAQACAAAAAAAAABQAAQACAAAAAAAAABUAAQACAAAAAAABAAMAAQAFAAYAAAABAAQAAQAFAAYAAAABAAUAAQAFAAcAAAABAAYAAQACAAAAAAABAAcAAQACAAAAAAABAAgAAQACAAAAAAABAAkAAQACAAAAAAABAAoAAQACAAAAAAABAAsAAQACAAAAAAABAAwAAQACAAAAAAABAA0AAQACAAAAAAABAA4AAQACAAAAAAABAA8AAQACAAAAAAABABAAAQACAAAAAAABABEAAQACAAAAAAABABIAAQACAAAAAAABABMAAQACAAAAAAABABQAAQACAAAAAAABABUAAQACAAAAAAACAAMAAQAFAAYAAAACAAQAAQAFAAYAAAACAAUAAQAFAAcAAAACAAYAAQACAAAAAAACAAcAAQACAAAAAAACAAgAAQACAAAAAAACAAkAAQACAAAAAAACAAoAAQACAAAAAAACAAsAAQACAAAAAAACAAwAAQACAAAAAAACAA0AAQACAAAAAAACAA4AAQACAAAAAAACAA8AAQACAAAAAAACABAAAQACAAAAAAACABEAAQACAAAAAAACABIAAQACAAAAAAACABMAAQACAAAAAAACABQAAQACAAAAAAACABUAAQACAAAAAAADAAMAAQAFAAYAAAADAAQAAQAFAAYAAAADAAUAAQAFAAcAAAADAAYAAQACAAAAAAADAAcAAQACAAAAAAADAAgAAQACAAAAAAADAAkAAQACAAAAAAADAAoAAQACAAAAAAADAAsAAQACAAAAAAADAAwAAQACAAAAAAADAA0AAQACAAAAAAADAA4AAQACAAAAAAADAA8AAQACAAAAAAADABAAAQACAAAAAAADABEAAQACAAAAAAADABIAAQACAAAAAAADABMAAQACAAAAAAADABQAAQACAAAAAAADABUAAQACAAAAAAAEAAIAAQAFAAUAAAAEAAMAAQAFAAYAAAAEAAQAAQAFAAYAAAAEAAUAAQAFAAcAAAAEAAYAAQACAAAAAAAEAAcAAQACAAAAAAAEAAgAAQACAAAAAAAEAAkAAQACAAAAAAAEAAoAAQACAAAAAAAEAAsAAQACAAAAAAAEAAwAAQACAAAAAAAEAA0AAQACAAAAAAAEAA4AAQACAAAAAAAEAA8AAQACAAAAAAAEABAAAQACAAAAAAAEABEAAQACAAAAAAAEABIAAQACAAAAAAAEABMAAQACAAAAAAAEABQAAQACAAAAAAAEABUAAQACAAAAAAAFAAIAAQAFAAUAAAAFAAMAAQAFAAYAAAAFAAQAAQAFAAYAAAAFAAUAAQAFAAcAAAAFAAYAAQACAAAAAAAFAAcAAQACAAAAAAAFAAgAAQACAAAAAAAFAAkAAQACAAAAAAAFAAoAAQACAAAAAAAFAAsAAQACAAAAAAAFAAwAAQACAAAAAAAFAA0AAQACAAAAAAAFAA4AAQACAAAAAAAFAA8AAQACAAAAAAAFABAAAQACAAAAAAAFABEAAQACAAAAAAAFABIAAQACAAAAAAAFABMAAQACAAAAAAAFABQAAQACAAAAAAAFABUAAQACAAAAAAAGAAIAAQAFAAUAAAAGAAMAAQAFAAYAAAAGAAQAAQAFAAYAAAAGAAUAAQAFAAcAAAAGAAYAAQACAAAAAAAGAAcAAQACAAAAAAAGAAgAAQACAAAAAAAGAAkAAQACAAAAAAAGAAoAAQACAAAAAAAGAAsAAQACAAAAAAAGAAwAAQACAAAAAAAGAA0AAQACAAAAAAAGAA4AAQACAAAAAAAGAA8AAQACAAAAAAAGABAAAQACAAAAAAAGABEAAQACAAAAAAAGABIAAQACAAAAAAAGABMAAQACAAAAAAAGABQAAQACAAAAAAAGABUAAQACAAAAAAAHAAIAAQAFAAUAAAAHAAMAAQAFAAYAAAAHAAQAAQAFAAYAAAAHAAUAAQAFAAcAAAAHAAYAAQACAAAAAAAHAAcAAQACAAAAAAAHAAgAAQACAAAAAAAHAAkAAQACAAAAAAAHAAoAAQACAAAAAAAHAAsAAQACAAAAAAAHAAwAAQACAAAAAAAHAA0AAQACAAAAAAAHAA4AAQACAAAAAAAHAA8AAQACAAAAAAAHABAAAQACAAAAAAAHABEAAQACAAAAAAAHABIAAQACAAAAAAAHABMAAQACAAAAAAAHABQAAQACAAAAAAAHABUAAQACAAAAAAAIAAIAAQAFAAUAAAAIAAMAAQAFAAYAAAAIAAQAAQAFAAYAAAAIAAUAAQAFAAcAAAAIAAYAAQACAAAAAAAIAAcAAQACAAAAAAAIAAgAAQACAAAAAAAIAAkAAQACAAAAAAAIAAoAAQACAAAAAAAIAAsAAQACAAAAAAAIAAwAAQACAAAAAAAIAA0AAQACAAAAAAAIAA4AAQACAAAAAAAIAA8AAQACAAAAAAAIABAAAQACAAAAAAAIABEAAQACAAAAAAAIABIAAQACAAAAAAAIABMAAQACAAAAAAAIABQAAQACAAAAAAAIABUAAQACAAAAAAAJAAIAAQAFAAUAAAAJAAMAAQAFAAYAAAAJAAQAAQAFAAYAAAAJAAUAAQAFAAcAAAAJAAYAAQACAAAAAAAJAAcAAQACAAAAAAAJAAgAAQACAAAAAAAJAAkAAQACAAAAAAAJAAoAAQACAAAAAAAJAAsAAQACAAAAAAAJAAwAAQACAAAAAAAJAA0AAQACAAAAAAAJAA4AAQACAAAAAAAJAA8AAQACAAAAAAAJABAAAQACAAAAAAAJABEAAQACAAAAAAAJABIAAQACAAAAAAAJABMAAQACAAAAAAAJABQAAQACAAAAAAAJABUAAQACAAAAAAAKAAIAAQAFAAUAAAAKAAMAAQAFAAYAAAAKAAQAAQAFAAYAAAAKAAUAAQAFAAcAAAAKAAYAAQACAAAAAAAKAAcAAQACAAAAAAAKAAgAAQACAAAAAAAKAAkAAQACAAAAAAAKAAoAAQACAAAAAAAKAAsAAQACAAAAAAAKAAwAAQACAAAAAAAKAA0AAQACAAAAAAAKAA4AAQACAAAAAAAKAA8AAQACAAAAAAAKABAAAQACAAAAAAAKABEAAQACAAAAAAAKABIAAQACAAAAAAAKABMAAQACAAAAAAAKABQAAQACAAAAAAAKABUAAQACAAAAAAALAAIAAQAFAAUAAAALAAMAAQAFAAYAAAALAAQAAQAFAAYAAAALAAUAAQAFAAcAAAALAAYAAQACAAAAAAALAAcAAQACAAAAAAALAAgAAQACAAAAAAALAAkAAQACAAAAAAALAAoAAQACAAAAAAALAAsAAQACAAAAAAALAAwAAQACAAAAAAALAA0AAQACAAAAAAALAA4AAQACAAAAAAALAA8AAQACAAAAAAALABAAAQACAAAAAAALABEAAQACAAAAAAALABIAAQACAAAAAAALABMAAQACAAAAAAALABQAAQACAAAAAAALABUAAQACAAAAAAAMAAIAAQAFAAUAAAAMAAMAAQAFAAYAAAAMAAQAAQAFAAYAAAAMAAUAAQAFAAcAAAAMAAYAAQACAAAAAAAMAAcAAQACAAAAAAAMAAgAAQACAAAAAAAMAAkAAQACAAAAAAAMAAoAAQACAAAAAAAMAAsAAQACAAAAAAAMAAwAAQACAAAAAAAMAA0AAQACAAAAAAAMAA4AAQACAAAAAAAMAA8AAQACAAAAAAAMABAAAQACAAAAAAAMABEAAQACAAAAAAAMABIAAQACAAAAAAAMABMAAQACAAAAAAAMABQAAQACAAAAAAAMABUAAQACAAAAAAANAAIAAQAFAAUAAAANAAMAAQAFAAYAAAANAAQAAQAFAAYAAAANAAUAAQAFAAcAAAANAAYAAQACAAAAAAANAAcAAQACAAAAAAANAAgAAQACAAAAAAANAAkAAQACAAAAAAANAAoAAQACAAAAAAANAAsAAQACAAAAAAANAAwAAQACAAAAAAANAA0AAQACAAAAAAANAA4AAQACAAAAAAANAA8AAQACAAAAAAANABAAAQACAAAAAAANABEAAQACAAAAAAANABIAAQACAAAAAAANABMAAQACAAAAAAANABQAAQACAAAAAAANABUAAQACAAAAAAAOAAIAAQAFAAUAAAAAAAIAAQAFAAUAAAABAAIAAQAFAAUAAAACAAIAAQAFAAUAAAADAAIAAQAFAAUAAAAOAAMAAQAFAAYAAAAOAAQAAQAFAAYAAAAOAAUAAQAFAAcAAAA=")
+tile_set = ExtResource("1_pc63w")
+metadata/_edit_lock_ = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayer" unique_id=148600927]
+tile_map_data = PackedByteArray("AAABAAMAAQAIAAUAAAABAAQAAQAIAAYAAAADAAMAAQAIAAUAAAADAAQAAQAIAAYAAAAFAAMAAQAIAAUAAAAFAAQAAQAIAAYAAAAHAAMAAQAIAAUAAAAHAAQAAQAIAAYAAAAIAAkAAQAEAAEAAAAHAAkAAQAEAAEAAAAGAAkAAQAEAAEAAAAFAAkAAQAEAAEAAAAEAAkAAQAEAAEAAAAJAAkAAQAGAAEAAAAEAA4AAQACAAQAAAAEAA0AAQACAAQAAAAEAAwAAQACAAQAAAAEAAsAAQACAAMAAAAEAA8AAQACAAQAAAAEABAAAQACAAQAAAAEABEAAQACAAQAAAADABEAAQAAAAQAAAADAA8AAQAAAAQAAAADAA4AAQAAAAQAAAADAA0AAQAAAAQAAAADAAwAAQAAAAQAAAADABAAAQAAAAQAAAADAAsAAQAAAAMAAAADAAcAAQAFAAAAAAAFAAcAAQAFAAAAAAAHAAcAAQAFAAAAAAAGAAcAAQAEAAAAAAAEAAcAAQAEAAAAAAACAAcAAQADAAAAAAACAAgAAQADAAEAAAAIAAcAAQAGAAAAAAAIAAgAAQAGAAEAAAA=")
+tile_set = ExtResource("1_pc63w")
+
+[node name="NPC" parent="." unique_id=1971382674 node_paths=PackedStringArray("_bubbleAnchor") instance=ExtResource("2_h2dh3")]
+position = Vector2(896.99994, 1478)
+script = ExtResource("4_dkqvl")
+NpcData = SubResource("Resource_og5b5")
+_bubbleAnchor = NodePath("BubbleAnchor2")
+
+[node name="BubbleAnchor2" type="Marker2D" parent="NPC" unique_id=962884026]
+position = Vector2(96.25006, -181.25)
+
+[node name="NPC2" parent="." unique_id=733770671 node_paths=PackedStringArray("_bubbleAnchor") instance=ExtResource("2_h2dh3")]
+position = Vector2(129, 969)
+script = ExtResource("4_dkqvl")
+NpcData = SubResource("Resource_1ynou")
+_bubbleAnchor = NodePath("BubbleAnchor2")
+
+[node name="BubbleAnchor2" type="Marker2D" parent="NPC2" unique_id=1793723619]
+position = Vector2(296.25, -86.25)
+
+[node name="NPC3" parent="." unique_id=1962531674 node_paths=PackedStringArray("_bubbleAnchor") instance=ExtResource("2_h2dh3")]
+position = Vector2(132, 1343)
+script = ExtResource("4_dkqvl")
+NpcData = SubResource("Resource_1uikg")
+_bubbleAnchor = NodePath("BubbleAnchor2")
+
+[node name="BubbleAnchor2" type="Marker2D" parent="NPC3" unique_id=305557228]
+position = Vector2(213.74997, -93.75)
+
+[node name="TileMap" type="TileMapLayer" parent="." unique_id=1931503232]
+tile_map_data = PackedByteArray("AAADAAYAAQALAAAAAAAHAAYAAQAMAAAAAAAFAAYAAQANAAAAAAAGAAsAAQAMAAQAAAAGAAwAAQAMAAUAAAAHAAsAAQANAAQAAAAHAAwAAQANAAUAAAAAAAoAAQAMAAQAAAAAAAsAAQAMAAUAAAABAAoAAQANAAQAAAABAAsAAQANAAUAAAAGAAgAAQAMAAQAAAAGAAkAAQAMAAUAAAAHAAgAAQANAAQAAAAHAAkAAQANAAUAAAAAAAcAAQAMAAQAAAAAAAgAAQAMAAUAAAABAAcAAQANAAQAAAABAAgAAQANAAUAAAA=")
+tile_set = ExtResource("1_pc63w")
+metadata/_edit_lock_ = true
+
+[node name="Item" parent="." unique_id=232541916 instance=ExtResource("6_8q3oc")]
+position = Vector2(450, 922)
+ItemData = ExtResource("8_8vnoi")
+
+[node name="Item2" parent="." unique_id=430339923 instance=ExtResource("6_8q3oc")]
+position = Vector2(707, 917)
+ItemData = ExtResource("9_og5b5")
+
+[node name="Item3" parent="." unique_id=189394178 instance=ExtResource("6_8q3oc")]
+position = Vector2(952, 917)
+ItemData = ExtResource("7_og5b5")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1845835214]
+limit_left = 0
+limit_top = 0
+limit_right = 1080
+limit_bottom = 1920
+
+[node name="Area2D" type="Area2D" parent="." unique_id=115071424]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2104026756]
+position = Vector2(512.25, 1975.5)
+shape = SubResource("RectangleShape2D_tln0d")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=2024365531]
+position = Vector2(511, 1385)
+
+[node name="NPC4" parent="." unique_id=998426861 node_paths=PackedStringArray("_bubbleAnchor") instance=ExtResource("2_h2dh3")]
+position = Vector2(945.99994, 651)
+script = ExtResource("16_cmkab")
+NpcData = SubResource("Resource_h85b0")
+_bubbleAnchor = NodePath("BubbleAnchor2")
+
+[node name="BubbleAnchor2" type="Marker2D" parent="NPC4" unique_id=1978150080]
+position = Vector2(-76.24992, -97.5)
+
+[connection signal="body_entered" from="Area2D" to="." method="OnCoffeeShopArea2DEnter"]
