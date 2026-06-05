@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://cf6o51o6qo8m5"]
+
+[ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="1_0k0to"]
+[ext_resource type="Texture2D" uid="uid://ddv8ukexlgjcp" path="res://assets/Items/teaItem.png" id="1_60jl7"]
+[ext_resource type="Resource" uid="uid://qpufgs5sjqa2" path="res://resources/Lexicon/Nouns/noun_tea.tres" id="2_60jl7"]
+
+[resource]
+script = ExtResource("1_0k0to")
+Id = "tea"
+ItemName = "Tea"
+Icon = ExtResource("1_60jl7")
+VocabularyEntry = ExtResource("2_60jl7")
+metadata/_custom_type_script = "uid://b8rma08qyirun"

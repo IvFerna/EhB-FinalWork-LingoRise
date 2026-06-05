@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://hts7l7300bxq"]
+
+[ext_resource type="Script" uid="uid://b8rma08qyirun" path="res://scripts/systems/Inventory/InventoryItem.cs" id="1_8as2a"]
+[ext_resource type="Texture2D" uid="uid://ce07a1mbuql1r" path="res://assets/Items/CoffeeItem.png" id="1_cl7mq"]
+[ext_resource type="Resource" uid="uid://brfcwbppyhfnd" path="res://resources/Lexicon/Nouns/noun_coffee.tres" id="2_cl7mq"]
+
+[resource]
+script = ExtResource("1_8as2a")
+Id = "coffee"
+ItemName = "Cup of coffee"
+Description = "Coffee cup for coffee shop"
+Icon = ExtResource("1_cl7mq")
+VocabularyEntry = ExtResource("2_cl7mq")
+metadata/_custom_type_script = "uid://b8rma08qyirun"

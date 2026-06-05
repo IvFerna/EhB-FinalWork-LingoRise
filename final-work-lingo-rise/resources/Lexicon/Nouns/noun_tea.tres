@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LexiconEntry" format=3 uid="uid://qpufgs5sjqa2"]
+
+[ext_resource type="Texture2D" uid="uid://ddv8ukexlgjcp" path="res://assets/Items/teaItem.png" id="1_rk2ll"]
+[ext_resource type="Script" uid="uid://dvokk5xg60ff" path="res://scripts/systems/lexicon/LexiconEntry.cs" id="2_pl2wb"]
+
+[resource]
+script = ExtResource("2_pl2wb")
+Id = "noun_tea"
+ForeignWord = "Taza de te"
+NativeTranslation = "Kop thee"
+Icon = ExtResource("1_rk2ll")
+metadata/_custom_type_script = "uid://dvokk5xg60ff"
