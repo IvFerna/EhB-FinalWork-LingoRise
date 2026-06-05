@@ -59,6 +59,14 @@ corner_radius_bottom_left = 10
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pwshh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yeli2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_utqgj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aupvj"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i153n"]
 bg_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
 corner_radius_top_left = 10
@@ -69,11 +77,19 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utqgj"]
 bg_color = Color(0.03529412, 0.53333336, 0.5647059, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4epo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cx7ai"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ucw6a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1usqi"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwshh"]
-bg_color = Color(0.68235296, 0.62352943, 0.46666667, 1)
+bg_color = Color(0.56078434, 0.50980395, 0.37254903, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeli2"]
-bg_color = Color(0.56078434, 0.50980395, 0.37254903, 1)
+bg_color = Color(0.68235296, 0.62352943, 0.46666667, 1)
 
 [resource]
 Button/colors/font_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
@@ -92,8 +108,16 @@ Button/styles/hover = SubResource("StyleBoxFlat_xpiny")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_xpiny")
 Button/styles/normal = SubResource("StyleBoxFlat_bhu4a")
 Button/styles/pressed = SubResource("StyleBoxFlat_e2per")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_pwshh")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_yeli2")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_utqgj")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_aupvj")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_i153n")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_utqgj")
+OptionButton/styles/hover = SubResource("StyleBoxEmpty_s4epo")
+OptionButton/styles/hover_pressed = SubResource("StyleBoxEmpty_cx7ai")
+OptionButton/styles/normal = SubResource("StyleBoxEmpty_ucw6a")
+OptionButton/styles/pressed = SubResource("StyleBoxEmpty_1usqi")
 PopupMenu/colors/font_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
 PopupMenu/colors/font_hover_color = Color(0.03529412, 0.53333336, 0.5647059, 1)
 PopupMenu/font_sizes/font_size = 24
