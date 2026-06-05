@@ -21,15 +21,15 @@ public partial class RequestSystem : Node
     public enum RequestState
     {
         None,
-        TalkToBaker,
+        TalkToNpc,
         FindItem,
-        ReturnToBaker,
+        ReturnToNpc,
         Completed
     }
 
     public override void _Ready()
     {
-        CurrentState = RequestState.TalkToBaker;
+        CurrentState = RequestState.TalkToNpc;
     }
 
     public void StartRequest(InventoryItem item)
@@ -46,7 +46,7 @@ public partial class RequestSystem : Node
 
     public void MarkItemCollected()
     {
-        CurrentState = RequestState.ReturnToBaker;
+        CurrentState = RequestState.ReturnToNpc;
 
         EmitSignal(
             SignalName.RequestStateChanged,

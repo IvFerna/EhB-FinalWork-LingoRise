@@ -11,18 +11,25 @@ public enum DialoguePriority
 public partial class DialogueManager : Node
 {
     public static DialogueManager Instance;
+
+    private const string SpeechBubblePath =
+        "res://scenes/ui/SpeechBubble.tscn";
+
     private LexiconManager _wordSystem;
     private DialoguePriority _currentPriority;
     private PackedScene _speechBubbleScene;
 
     private SpeechBubble _activeBubble;
 
-    public bool IsDialogueActive
-    => _activeBubble != null
-       && _activeBubble.IsInsideTree();
+    public bool IsDialogueActive =>
+        GodotObject.IsInstanceValid(_activeBubble)
+        && _activeBubble.IsInsideTree();
 
     public bool IsMenuOpen { get; private set; }
-    public bool CanPlayDialogue => !IsMenuOpen;
+    public bool DialogueEnabled { get; private set; } = true;
+
+
+    public bool CanPlayDialogue => !IsMenuOpen && DialogueEnabled;
 
     public override void _Ready()
     {
@@ -33,9 +40,48 @@ public partial class DialogueManager : Node
         );
 
         _speechBubbleScene =
-            GD.Load<PackedScene>(
-                "res://scenes/ui/SpeechBubble.tscn"
-            );
+            GD.Load<PackedScene>(SpeechBubblePath);
+
+        GD.Print(
+            $"SpeechBubble scene loaded successfully: {_speechBubbleScene != null}"
+        );
+    }
+
+    private bool IsManagerValid()
+    {
+        return GodotObject.IsInstanceValid(this)
+            && IsInsideTree();
+    }
+
+    private void ClearActiveBubble()
+    {
+        if (GodotObject.IsInstanceValid(_activeBubble))
+        {
+            _activeBubble.QueueFree();
+        }
+
+        _activeBubble = null;
+    }
+
+    private bool ShouldSkipDialogue(
+        DialoguePriority priority
+    )
+    {
+        if (!IsDialogueActive)
+            return false;
+
+        return priority < _currentPriority;
+    }
+
+    private async Task PlayDialogueAudio(
+        string language,
+        string text
+    )
+    {
+        await TTSService.Instance.PlayAudio(
+            language,
+            text
+        );
     }
 
     public async Task ShowDialogue(
@@ -46,75 +92,110 @@ public partial class DialogueManager : Node
     )
     {
         if (!CanPlayDialogue)
-            return;
-
-        if (IsDialogueActive)
         {
-            if (priority < _currentPriority)
-            {
-                return;
-            }
-
-            _activeBubble.QueueFree();
-            _activeBubble = null;
+            GD.PrintErr(
+                "ShowDialogue: Cannot play dialogue right now (menu open)"
+            );
+            return;
         }
 
-        _activeBubble = _speechBubbleScene.Instantiate<SpeechBubble>();
+        if (!GodotObject.IsInstanceValid(anchor))
+        {
+            GD.PrintErr(
+                "ShowDialogue: Dialogue anchor is invalid"
+            );
+            return;
+        }
+
+        if (ShouldSkipDialogue(priority))
+        {
+            GD.Print(
+                $"Skipping dialogue. Current priority: {_currentPriority}, New priority: {priority}"
+            );
+            return;
+        }
+
+        ClearActiveBubble();
+
+        _activeBubble =
+            _speechBubbleScene.Instantiate<SpeechBubble>();
+
         anchor.AddChild(_activeBubble);
 
         _activeBubble.ShowText(text);
+
         _currentPriority = priority;
+
         // Small readability delay
         await ToSignal(
             GetTree().CreateTimer(0.35f),
             "timeout"
         );
 
-        if (!CanPlayDialogue)
-        {
-            StopActiveDialogue();
+        if (!IsManagerValid())
             return;
-        }
 
-        await TTSService.Instance.PlayAudio(
+        await PlayDialogueAudio(
             language,
             text
         );
 
-        if (!CanPlayDialogue)
-        {
-            StopActiveDialogue();
+        if (!IsManagerValid())
             return;
-        }
+
         await ToSignal(
             GetTree().CreateTimer(2.5f),
             "timeout"
         );
 
+        if (!IsManagerValid())
+            return;
 
-        if (_activeBubble != null)
+        if (!CanPlayDialogue)
         {
-            _activeBubble.QueueFree();
-            _activeBubble = null;
+            StopActiveDialogue();
+            return;
         }
+
+        ClearActiveBubble();
     }
 
     public async Task ShowDialogueWithExposure(
         Node2D anchor,
         DialogueData dialogue,
         DialoguePriority priority = DialoguePriority.Ambient,
-        Dictionary<string, string> replacements = null)
+        Dictionary<string, string> replacements = null
+    )
     {
         if (dialogue == null)
         {
-            GD.PrintErr("ShowDialogueWithExposure called with null DialogueData");
+            GD.PrintErr(
+                "ShowDialogueWithExposure called with null DialogueData"
+            );
             return;
         }
 
-        if (_wordSystem != null && dialogue.ExposedWords != null)
+        if (_wordSystem != null &&
+            dialogue.ExposedWords != null)
         {
             foreach (var word in dialogue.ExposedWords)
             {
+                if (word == null)
+                {
+                    GD.PrintErr(
+                        "ShowDialogueWithExposure: encountered null word in ExposedWords"
+                    );
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(word.Id))
+                {
+                    GD.PrintErr(
+                        "ShowDialogueWithExposure: encountered exposed word with empty Id"
+                    );
+                    continue;
+                }
+
                 _wordSystem.RegisterExposure(
                     word.Id,
                     ExposureType.Heard
@@ -122,9 +203,11 @@ public partial class DialogueManager : Node
             }
         }
 
-        if (anchor == null)
+        if (!GodotObject.IsInstanceValid(anchor))
         {
-            GD.PrintErr("ShowDialogueWithExposure: anchor is null, aborting dialogue display");
+            GD.PrintErr(
+                "ShowDialogueWithExposure: anchor is invalid"
+            );
             return;
         }
 
@@ -141,12 +224,15 @@ public partial class DialogueManager : Node
             }
         }
 
-        await DialogueManager.Instance.ShowDialogue(
+        await ShowDialogue(
             anchor,
             "es",
             finalText,
             priority
         );
+
+        if (!IsManagerValid())
+            return;
     }
 
     public void SetMenuOpen(bool isOpen)
@@ -159,16 +245,27 @@ public partial class DialogueManager : Node
         }
     }
 
+    public void ClearDialogue()
+    {
+        StopActiveDialogue();
+    }
+
     private void StopActiveDialogue()
     {
-        if (_activeBubble != null)
-        {
-            _activeBubble.QueueFree();
-            _activeBubble = null;
-        }
+        ClearActiveBubble();
 
-        // Optional:
-        // stop TTS audio immediately if your service supports it
-        TTSService.Instance.Stop();
+        if (TTSService.Instance != null)
+        {
+            TTSService.Instance.Stop();
+        }
+    }
+    public void SetDialogueEnabled(bool enabled)
+    {
+        DialogueEnabled = enabled;
+
+        if (!enabled)
+        {
+            StopActiveDialogue();
+        }
     }
 }
