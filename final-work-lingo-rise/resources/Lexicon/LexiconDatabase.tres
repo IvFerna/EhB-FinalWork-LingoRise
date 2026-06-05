@@ -9,8 +9,10 @@
 [ext_resource type="Resource" uid="uid://bapxa2s31es1x" path="res://resources/Lexicon/Verbs/verb_bring.tres" id="6_8vgod"]
 [ext_resource type="Resource" uid="uid://6x2eqi37nen6" path="res://resources/Lexicon/Verbs/verb_buy.tres" id="7_eebir"]
 [ext_resource type="Resource" uid="uid://c6a4e0kqmq14t" path="res://resources/Lexicon/Verbs/verb_give.tres" id="8_hd3k8"]
+[ext_resource type="Resource" uid="uid://qpufgs5sjqa2" path="res://resources/Lexicon/Nouns/noun_tea.tres" id="9_3bexi"]
+[ext_resource type="Resource" uid="uid://brfcwbppyhfnd" path="res://resources/Lexicon/Nouns/noun_coffee.tres" id="10_uc8tw"]
 
 [resource]
 script = ExtResource("1_1qgih")
-Entries = Array[Resource]([ExtResource("1_eklbx"), ExtResource("2_sxpbw"), ExtResource("3_3bexi"), ExtResource("4_uc8tw"), ExtResource("5_45tre"), ExtResource("6_8vgod"), ExtResource("7_eebir"), ExtResource("8_hd3k8")])
+Entries = Array[Resource]([ExtResource("1_eklbx"), ExtResource("2_sxpbw"), ExtResource("3_3bexi"), ExtResource("4_uc8tw"), ExtResource("5_45tre"), ExtResource("6_8vgod"), ExtResource("7_eebir"), ExtResource("8_hd3k8"), ExtResource("9_3bexi"), ExtResource("10_uc8tw")])
 metadata/_custom_type_script = "uid://diela2kif75ce"
