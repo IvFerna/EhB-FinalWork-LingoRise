@@ -78,4 +78,11 @@ public partial class InventoryComponent : Node
 
         return _items[0];
     }
+
+    public void ClearInventory()
+    {
+        _items.Clear();
+        _heldWorldItem = null;
+        InventoryChanged?.Invoke();
+    }
 }
