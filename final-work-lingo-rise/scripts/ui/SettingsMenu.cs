@@ -74,4 +74,11 @@ public partial class SettingsMenu : Control
         UIManager.Instance.CloseCurrentSubmenu(this);
     }
 
+    private void OnResetProgressPressed()
+    {
+        Main.Instance.ResetGame();
+        GD.Print("Game progress reset.");
+        UIManager.Instance.CloseCurrentSubmenu(this);
+    }
+
 }

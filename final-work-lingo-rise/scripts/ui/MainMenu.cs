@@ -9,10 +9,9 @@ public partial class MainMenu : Control
 		GD.Print(UIManager.Instance);
 	}
 
-	private void OnHomePressed()
+	private void OnPlayPressed()
 	{
-		GD.Print("Home button pressed.");
-		// Implement home button functionality here
+		UIManager.Instance.OnPlayPressed();
 	}
 
 	private void OnSettingsPressed()

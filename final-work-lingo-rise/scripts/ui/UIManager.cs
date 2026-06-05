@@ -12,7 +12,11 @@ public partial class UIManager : CanvasLayer
     {
         Instance = this;
 
-        CloseAllMenus();
+        // CloseAllMenus();
+        // _mainMenu.Visible = true;
+        _settingsMenu.Visible = false;
+        _lexiconMenu.Visible = false;
+        DialogueManager.Instance.SetMenuOpen(_mainMenu.Visible);
     }
 
     public void ToggleMainMenu()
@@ -34,6 +38,12 @@ public partial class UIManager : CanvasLayer
         CloseAllMenus();
         _settingsMenu.Visible = true;
         DialogueManager.Instance.SetMenuOpen(true);
+    }
+
+    public void OnPlayPressed()
+    {
+        GD.Print("Play button pressed.");
+        CloseAllMenus();
     }
 
     public void CloseAllMenus()
