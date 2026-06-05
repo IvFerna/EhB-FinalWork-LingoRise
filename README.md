@@ -36,18 +36,24 @@ Current focus:
 
 ---
 
-## Quick Start
+## Setup
 
-### Backend
+### Prerequisites
+
+- Godot 4.x
+- Node.js
+
+### Backend Setup
 
 ```bash
-git clone <repo-url>  # if not already cloned
 cd backend
 npm install
 npm run dev
 ```
 
-### Godot
+The backend will start a TTS service accessible at `http://localhost:3000`.
+
+### Godot Setup
 
 Open `final-work-lingo-rise/` in Godot 4.x.
 
@@ -77,11 +83,23 @@ Within `final-work-lingo-rise/`:
 
 ```
 assets/        → In-game art, icons, tilesets, and imported assets
-autoload/      → Global singleton systems and managers
+addons/        → Mobile virtual joystick support
+android/       → Android build configuration and outputs
 resources/     → Lexicon database and game resources
 scenes/        → Core scenes, UI scenes, and scenario layouts
 scripts/       → C# game logic, UI controllers, systems, and save data
-addons/        → mobile virtual joystick support
+```
+
+Within `final-work-lingo-rise/scripts/`:
+
+```
+autoload/      → Singleton managers initialized at startup (Lexicon, Audio, TTS, etc.)
+core/          → Scene management and game state coordination
+gameplay/      → Gameplay mechanics and player interactions
+savedata/      → Save/load functionality and game state persistence
+systems/       → Core game systems (Inventory, Requests, Dialogue, etc.)
+ui/            → UI screens and interactive elements
+utilities/     → Helper functions and utility classes
 ```
 
 ---
@@ -95,27 +113,21 @@ addons/        → mobile virtual joystick support
 - **Audio Manager**: handles WAV playback for TTS and other audio events
 - **Inventory & Request Flow**: item pickup, inventory slot management, request states, and validation for requested items
 - **UI Flow**: main menu toggling, lexicon menu, settings menu, and inventory UI updates
-- **Backend Integration**: Express route at `/api/tts/generate`, Piper speech synthesis, and static file serving for cached audio
 
-### Backend Flow
+---
+
+## Backend Integration
+
+The game communicates with a Node.js backend service for text-to-speech generation:
 
 ```text
 [Godot TTSService] --> POST /api/tts/generate --> [Express backend]
-[Express backend] --> [Piper TTS generator] --> [storage/tts/*.wav]
-[Express backend] --> response { audioPath, fileName }
-[Godot TTSService] --> download/cached audio from [storage/tts]
+[Express backend] --> [TTS Engine (Piper)] --> [Generated audio files]
+[Godot TTSService] --> download/cached audio from backend
 [AudioManager] --> play cached WAV
 ```
 
----
-
-## External Dependencies
-
-Piper binaries and language models are excluded from the repository and must be installed separately. This is only required for local Piper TTS and not for any online Piper setup.
-
----
-
-## Architectural Approach
+The backend handles audio generation, caching, and serving to the Godot client.
 
 The project remains modular and scalable to support iterative development and academic experimentation.
 
