@@ -3,22 +3,22 @@
 [ext_resource type="PackedScene" uid="uid://c5tlmdivw7hj8" path="res://scenes/ui/LexiconPanel.tscn" id="1_gft0v"]
 [ext_resource type="Script" uid="uid://b2drxuf3ovo3k" path="res://scripts/systems/lexicon/LexiconMenu.cs" id="1_xqc0g"]
 [ext_resource type="FontFile" uid="uid://bv6svs635fubm" path="res://assets/Fonts/CinzelDecorative-Bold.ttf" id="3_ln73q"]
+[ext_resource type="Texture2D" uid="uid://govv58y1cq2u" path="res://assets/Icons/Icon_cross.png" id="3_wgar5"]
+[ext_resource type="Texture2D" uid="uid://ccgndrkq5hsps" path="res://assets/Ui/UI_TitlePanel.png" id="4_ni6o5"]
+[ext_resource type="Texture2D" uid="uid://cia62stkoixb0" path="res://assets/Icons/Icon_return.png" id="5_uf47o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xqc0g"]
 
-[sub_resource type="Theme" id="Theme_xqc0g"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wgar5"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ln73q"]
-bg_color = Color(0.05490196, 0.24705882, 0.26666668, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="Theme" id="Theme_xqc0g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tiyfs"]
 font = ExtResource("3_ln73q")
 font_size = 48
 font_color = Color(0.93333334, 0.84313726, 0.49803922, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ni6o5"]
 
 [node name="LexiconMenu" type="Control" unique_id=1544877352]
 layout_mode = 3
@@ -44,7 +44,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.03529412, 0.53333336, 0.5647059, 1)
+color = Color(0.025506176, 0.16172475, 0.17579874, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=977741248]
 layout_mode = 1
@@ -66,16 +66,19 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -130.0
-offset_top = 31.0
-offset_right = -35.0
-offset_bottom = 126.0
+offset_left = -184.0
+offset_top = 64.0
+offset_right = -59.0
+offset_bottom = 203.88095
 grow_horizontal = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Close"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wgar5")
+icon = ExtResource("3_wgar5")
+icon_alignment = 1
+expand_icon = true
 
-[node name="ColorRect2" type="PanelContainer" parent="." unique_id=1574473274]
+[node name="ColorRect2" type="NinePatchRect" parent="." unique_id=378083912]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.27125925
@@ -90,10 +93,18 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_xqc0g")
-theme_override_styles/panel = SubResource("StyleBoxFlat_ln73q")
+texture = ExtResource("4_ni6o5")
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="Label" type="Label" parent="ColorRect2" unique_id=639704740]
-layout_mode = 2
+layout_mode = 0
+offset_left = 134.0
+offset_top = 25.0
+offset_right = 358.0
+offset_bottom = 90.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
 text = "Lexicon"
@@ -104,10 +115,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Button2" type="Button" parent="." unique_id=102979303]
 layout_mode = 1
-offset_right = 140.0
-offset_bottom = 118.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 189.0
+offset_bottom = 203.88095
 size_flags_horizontal = 8
-text = "Go Back"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ni6o5")
+icon = ExtResource("5_uf47o")
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="pressed" from="Button" to="." method="OnClosePressed"]
 [connection signal="pressed" from="Button2" to="." method="onBackPressed"]
