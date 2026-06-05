@@ -9,6 +9,14 @@ public partial class PlayerController : CharacterBody2D
     private Vector2 ScreenSize;
     private InventoryComponent _inventory;
     private InventoryUI _inventoryUI;
+
+    [Export] private Texture2D UpTexture;
+    [Export] private Texture2D DownTexture;
+    [Export] private Texture2D LeftTexture;
+    [Export] private Texture2D RightTexture;
+
+    private Sprite2D _sprite;
+    private string _lastDirection = "down";
     public override void _Ready()
     {
         if (Instance != null && Instance != this)
@@ -22,6 +30,8 @@ public partial class PlayerController : CharacterBody2D
         _inventory = GetNode<InventoryComponent>("InventoryComponent");
         _inventoryUI = GetTree().CurrentScene.GetNode<InventoryUI>("InventoryUI");
         _inventory.InventoryChanged += OnInventoryChanged;
+
+        _sprite = GetNode<Sprite2D>("Sprite2D");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -39,6 +49,7 @@ public partial class PlayerController : CharacterBody2D
 
         // Normalize so diagonal isn't faster than cardinal
         Velocity = input.Normalized() * (input.Length() > 0 ? moveSpeed : 0);
+        UpdateDirection(input);
         MoveAndSlide();
     }
 
@@ -63,6 +74,43 @@ public partial class PlayerController : CharacterBody2D
     public InventoryItem GetHeldItem()
     {
         return _inventory.GetSelectedItem();
+    }
+    public void SetCameraEnabled(bool enabled)
+    {
+        GetNode<Camera2D>("Camera2D").Enabled = enabled;
+    }
+
+    private void UpdateDirection(Vector2 input)
+    {
+        if (input == Vector2.Zero)
+            return;
+
+        if (Mathf.Abs(input.X) > Mathf.Abs(input.Y))
+        {
+            if (input.X > 0)
+            {
+                _sprite.Texture = RightTexture;
+                _lastDirection = "right";
+            }
+            else
+            {
+                _sprite.Texture = LeftTexture;
+                _lastDirection = "left";
+            }
+        }
+        else
+        {
+            if (input.Y > 0)
+            {
+                _sprite.Texture = DownTexture;
+                _lastDirection = "down";
+            }
+            else
+            {
+                _sprite.Texture = UpTexture;
+                _lastDirection = "up";
+            }
+        }
     }
 
 }
