@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bids0kc1i5ani"]
+[gd_scene format=3 uid="uid://bids0kc1i5ani"]
 
 [ext_resource type="Script" uid="uid://bvanse0svf4v0" path="res://scripts/gameplay/Item.cs" id="1_k8lgd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8lgd"]
 size = Vector2(134, 139)
 
-[node name="Item" type="Area2D"]
+[node name="Item" type="Area2D" unique_id=232541916]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_k8lgd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=350732140]
 shape = SubResource("RectangleShape2D_k8lgd")
 
-[node name="ItemSprite" type="Sprite2D" parent="."]
+[node name="ItemSprite" type="Sprite2D" parent="." unique_id=1891600993]
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

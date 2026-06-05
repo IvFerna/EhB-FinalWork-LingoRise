@@ -1,14 +1,29 @@
 [gd_scene format=3 uid="uid://cjf6upacpp1si"]
 
-[ext_resource type="PackedScene" uid="uid://cywbaygma62ql" path="res://scenes/scenarios/BakeryScene.tscn" id="1_v0fxp"]
+[ext_resource type="Script" uid="uid://y04071tyojo3" path="res://scripts/core/Main.cs" id="1_8tad8"]
+[ext_resource type="PackedScene" uid="uid://dj011d7mbiljg" path="res://scenes/scenarios/MainHubScene.tscn" id="2_1wb4g"]
 [ext_resource type="PackedScene" uid="uid://cmernvclgwryu" path="res://scenes/ui/touch_controls.tscn" id="2_g3khn"]
+[ext_resource type="Texture2D" uid="uid://bapk5teg2nh2c" path="res://assets/Icons/Icon_menu.png" id="5_a4rsn"]
 [ext_resource type="PackedScene" uid="uid://bpuks88pe858q" path="res://scenes/core/UIManager.tscn" id="5_kitw3"]
 [ext_resource type="PackedScene" uid="uid://bv8q4i62mlbj6" path="res://scenes/ui/QuestUI.tscn" id="6_8tad8"]
 [ext_resource type="PackedScene" uid="uid://brxltwf52bapw" path="res://scenes/ui/Inventory/InventoryUI.tscn" id="6_a4rsn"]
+[ext_resource type="Texture2D" uid="uid://dvkv1ssjcjscl" path="res://assets/Ui/UI_SubquestIcon.png" id="6_p1ppg"]
+[ext_resource type="PackedScene" uid="uid://cke7iuitu10sy" path="res://scenes/core/Player.tscn" id="8_p1ppg"]
 
-[node name="Main" type="Node2D" unique_id=610220257]
+[node name="Main" type="Node2D" unique_id=610220257 node_paths=PackedStringArray("WorldContainer", "ScenarioCountLabel")]
+script = ExtResource("1_8tad8")
+WorldContainer = NodePath("WorldContainer")
+ScenarioCountLabel = NodePath("UI/HBoxContainer/ScenarioCount")
 
-[node name="BakeryScene" parent="." unique_id=1035025778 instance=ExtResource("1_v0fxp")]
+[node name="WorldContainer" type="Node2D" parent="." unique_id=687135437]
+
+[node name="MainHubScene" parent="WorldContainer" unique_id=122285167 instance=ExtResource("2_1wb4g")]
+
+[node name="Player" parent="." unique_id=579683830 instance=ExtResource("8_p1ppg")]
+z_index = 1
+position = Vector2(787, 1554)
+platform_floor_layers = 4294902015
+platform_wall_layers = 65280
 
 [node name="Control" type="Control" parent="." unique_id=189658929]
 layout_mode = 3
@@ -19,22 +34,43 @@ size_flags_horizontal = 4
 
 [node name="InventoryUI" parent="." unique_id=1656253928 instance=ExtResource("6_a4rsn")]
 
-[node name="QuestUi" parent="." unique_id=609891266 instance=ExtResource("6_8tad8")]
-offset_top = 50.0
-offset_bottom = 50.0
+[node name="UI" type="CanvasLayer" parent="." unique_id=1744085407]
 
-[node name="Button" type="Button" parent="." unique_id=1304656990]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=1807650068]
+offset_left = 35.0
+offset_top = 65.0
+offset_right = 131.0
+offset_bottom = 129.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer" unique_id=1792738957]
+layout_mode = 2
+texture = ExtResource("6_p1ppg")
+
+[node name="ScenarioCount" type="Label" parent="UI/HBoxContainer" unique_id=92558156]
+layout_mode = 2
+text = "000"
+vertical_alignment = 1
+
+[node name="QuestUI" parent="UI" unique_id=1111086607 instance=ExtResource("6_8tad8")]
+offset_left = -344.0
+offset_right = -344.0
+
+[node name="Button" type="Button" parent="UI" unique_id=1304656990]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 919.0
-offset_top = 17.0
-offset_right = 1059.0
-offset_bottom = 135.0
+offset_left = -151.0
+offset_top = 35.0
+offset_right = -31.0
+offset_bottom = 194.10114
 grow_horizontal = 0
 size_flags_horizontal = 8
 text = "Menu"
+icon = ExtResource("5_a4rsn")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
 [node name="UIManager" parent="." unique_id=688658435 instance=ExtResource("5_kitw3")]
 
-[connection signal="pressed" from="Button" to="UIManager" method="ToggleMainMenu"]
+[connection signal="pressed" from="UI/Button" to="UIManager" method="ToggleMainMenu"]

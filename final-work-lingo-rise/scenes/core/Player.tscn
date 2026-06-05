@@ -1,24 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://cke7iuitu10sy"]
+[gd_scene format=3 uid="uid://cke7iuitu10sy"]
 
-[ext_resource type="Texture2D" uid="uid://chel74oo28s36" path="res://assets/playerDummy.png" id="1_inkro"]
 [ext_resource type="Script" uid="uid://dcyqmwe6uj6n5" path="res://scripts/gameplay/PlayerController.cs" id="1_kaei4"]
+[ext_resource type="Texture2D" uid="uid://cri65ygw1klk2" path="res://assets/Characters/player.png" id="2_crf5v"]
+[ext_resource type="Texture2D" uid="uid://cm6yuerxlnldu" path="res://assets/Characters/playerFront.png" id="3_6vs3b"]
 [ext_resource type="Script" uid="uid://dqxau4vhxme48" path="res://scripts/systems/Inventory/InventoryComponent.cs" id="3_crf5v"]
+[ext_resource type="Texture2D" uid="uid://bkuuahv4ff0gr" path="res://assets/Characters/playerLeft.png" id="4_wttx2"]
+[ext_resource type="Texture2D" uid="uid://dtjv35b8mtr1t" path="res://assets/Characters/playerRight.png" id="5_3e3pn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kaei4"]
-size = Vector2(53, 159.00002)
+size = Vector2(153.75002, 150.00002)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=579683830 groups=["player"]]
+scale = Vector2(0.8, 0.8)
+collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_kaei4")
-moveSpeed = 300.0
+moveSpeed = 400.0
+UpTexture = ExtResource("2_crf5v")
+DownTexture = ExtResource("3_6vs3b")
+LeftTexture = ExtResource("4_wttx2")
+RightTexture = ExtResource("5_3e3pn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(497, 1476)
-scale = Vector2(0.5, 0.628)
-texture = ExtResource("1_inkro")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=500194645]
+texture = ExtResource("2_crf5v")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(496.5, 1477.5)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1053293185]
+position = Vector2(0.6249937, 78.74997)
+scale = Vector2(0.99999964, 0.99999964)
 shape = SubResource("RectangleShape2D_kaei4")
 
-[node name="InventoryComponent" type="Node" parent="."]
+[node name="InventoryComponent" type="Node" parent="." unique_id=1916551203]
 script = ExtResource("3_crf5v")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=487962810]
+position = Vector2(0, -285)
+limit_smoothed = true
