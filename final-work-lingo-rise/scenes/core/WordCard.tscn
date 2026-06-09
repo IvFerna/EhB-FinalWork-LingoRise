@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b41fdcjt2esac"]
+[gd_scene format=3 uid="uid://b41fdcjt2esac"]
 
 [ext_resource type="Texture2D" uid="uid://bnkpihl5yfq5a" path="res://assets/icon.svg" id="1_b3y4k"]
 [ext_resource type="Script" uid="uid://dlhghfp3l6w3p" path="res://scripts/ui/WordCard.cs" id="1_v8u6s"]
+[ext_resource type="FontFile" uid="uid://qo5q46i02mub" path="res://assets/Fonts/Poppins-Regular.ttf" id="3_1j0aj"]
+[ext_resource type="Texture2D" uid="uid://dtdx2olejbldm" path="res://assets/Icons/Icon_MasterVolume.png" id="3_cv3jp"]
+[ext_resource type="FontFile" uid="uid://ciagsnpuixve8" path="res://assets/Fonts/Poppins-Italic.ttf" id="3_luq0k"]
+[ext_resource type="Texture2D" uid="uid://dfxfu8tmcxwh0" path="res://assets/Icons/MagnifyingGlass.png" id="4_rfesl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8u6s"]
 content_margin_left = 8.0
@@ -19,7 +23,21 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[node name="Control" type="Control" node_paths=PackedStringArray("_icon", "_wordLabel", "_translationLabel")]
+[sub_resource type="LabelSettings" id="LabelSettings_oi0v2"]
+font = ExtResource("3_1j0aj")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1j0aj"]
+font = ExtResource("3_luq0k")
+font_size = 32
+font_color = Color(0.23753911, 0.23753914, 0.23753911, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rfesl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luq0k"]
+
+[node name="Control" type="Control" unique_id=497787125 node_paths=PackedStringArray("_icon", "_wordLabel", "_translationLabel")]
 custom_minimum_size = Vector2(460, 650)
 layout_mode = 3
 anchors_preset = 0
@@ -28,26 +46,26 @@ _icon = NodePath("WordCard/MarginContainer/VBoxContainer/TextureRect")
 _wordLabel = NodePath("WordCard/MarginContainer/VBoxContainer/Label")
 _translationLabel = NodePath("WordCard/MarginContainer/VBoxContainer/TranslatedLabel")
 
-[node name="WordCard" type="PanelContainer" parent="."]
+[node name="WordCard" type="PanelContainer" parent="." unique_id=142843119]
 custom_minimum_size = Vector2(460, 650)
 layout_mode = 0
 offset_right = 460.0
 offset_bottom = 650.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v8u6s")
 
-[node name="MarginContainer" type="MarginContainer" parent="WordCard"]
+[node name="MarginContainer" type="MarginContainer" parent="WordCard" unique_id=893070932]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WordCard/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WordCard/MarginContainer" unique_id=1046778070]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="WordCard/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="WordCard/MarginContainer/VBoxContainer" unique_id=291415926]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -56,46 +74,53 @@ texture = ExtResource("1_b3y4k")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="WordCard/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="WordCard/MarginContainer/VBoxContainer" unique_id=546632772]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 45
 text = "ITEM NAME"
+label_settings = SubResource("LabelSettings_oi0v2")
 horizontal_alignment = 1
 vertical_alignment = 2
 uppercase = true
 
-[node name="TranslatedLabel" type="Label" parent="WordCard/MarginContainer/VBoxContainer"]
+[node name="TranslatedLabel" type="Label" parent="WordCard/MarginContainer/VBoxContainer" unique_id=406387939]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 45
 text = "ITEM NAME"
+label_settings = SubResource("LabelSettings_1j0aj")
 horizontal_alignment = 1
 vertical_alignment = 2
 uppercase = true
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1026690468]
 layout_mode = 0
 offset_left = 21.0
-offset_top = 602.0
-offset_right = 50.0
-offset_bottom = 631.0
+offset_top = 556.0
+offset_right = 93.0
+offset_bottom = 628.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Listen"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rfesl")
+icon = ExtResource("3_cv3jp")
+icon_alignment = 1
+vertical_icon_alignment = 0
 
-[node name="TranslateButton" type="Button" parent="."]
+[node name="TranslateButton" type="Button" parent="." unique_id=1053156065]
 layout_mode = 0
-offset_left = 313.0
-offset_top = 600.0
-offset_right = 444.0
-offset_bottom = 631.0
+offset_left = 364.0
+offset_top = 554.0
+offset_right = 436.0
+offset_bottom = 626.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Reveal meaning"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_luq0k")
+icon = ExtResource("4_rfesl")
+icon_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="onListenButtonPressed"]
 [connection signal="pressed" from="TranslateButton" to="." method="onTranslateButtonPressed"]

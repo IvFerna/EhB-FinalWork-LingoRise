@@ -8,12 +8,22 @@
 [ext_resource type="PackedScene" uid="uid://bv8q4i62mlbj6" path="res://scenes/ui/QuestUI.tscn" id="6_8tad8"]
 [ext_resource type="PackedScene" uid="uid://brxltwf52bapw" path="res://scenes/ui/Inventory/InventoryUI.tscn" id="6_a4rsn"]
 [ext_resource type="Texture2D" uid="uid://dvkv1ssjcjscl" path="res://assets/Ui/UI_SubquestIcon.png" id="6_p1ppg"]
+[ext_resource type="FontFile" uid="uid://hy5algbxb3jh" path="res://assets/Fonts/Poppins-MediumItalic.ttf" id="7_v0fxp"]
 [ext_resource type="PackedScene" uid="uid://cke7iuitu10sy" path="res://scenes/core/Player.tscn" id="8_p1ppg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dau2k"]
+font = ExtResource("7_v0fxp")
+font_size = 32
+font_color = Color(0.93333334, 0.84313726, 0.49803922, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ld2r7"]
 
 [node name="Main" type="Node2D" unique_id=610220257 node_paths=PackedStringArray("WorldContainer", "ScenarioCountLabel")]
 script = ExtResource("1_8tad8")
 WorldContainer = NodePath("WorldContainer")
 ScenarioCountLabel = NodePath("UI/HBoxContainer/ScenarioCount")
+metadata/_edit_vertical_guides_ = [-1117.0]
+metadata/_edit_horizontal_guides_ = [95.0]
 
 [node name="WorldContainer" type="Node2D" parent="." unique_id=687135437]
 
@@ -38,22 +48,26 @@ size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=1807650068]
 offset_left = 35.0
-offset_top = 65.0
-offset_right = 131.0
-offset_bottom = 129.0
+offset_top = 52.0
+offset_right = 207.65625
+offset_bottom = 137.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer" unique_id=1792738957]
 layout_mode = 2
 texture = ExtResource("6_p1ppg")
+expand_mode = 2
 
 [node name="ScenarioCount" type="Label" parent="UI/HBoxContainer" unique_id=92558156]
 layout_mode = 2
 text = "000"
+label_settings = SubResource("LabelSettings_dau2k")
 vertical_alignment = 1
 
 [node name="QuestUI" parent="UI" unique_id=1111086607 instance=ExtResource("6_8tad8")]
 offset_left = -344.0
+offset_top = 143.0
 offset_right = -344.0
+offset_bottom = 143.0
 
 [node name="Button" type="Button" parent="UI" unique_id=1304656990]
 anchors_preset = 1
@@ -62,10 +76,10 @@ anchor_right = 1.0
 offset_left = -151.0
 offset_top = 35.0
 offset_right = -31.0
-offset_bottom = 194.10114
+offset_bottom = 155.0
 grow_horizontal = 0
 size_flags_horizontal = 8
-text = "Menu"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ld2r7")
 icon = ExtResource("5_a4rsn")
 icon_alignment = 1
 vertical_icon_alignment = 0
