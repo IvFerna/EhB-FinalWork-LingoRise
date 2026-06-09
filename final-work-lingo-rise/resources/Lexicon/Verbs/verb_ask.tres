@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LexiconEntry" format=3 uid="uid://bl2tydstawsft"]
+
+[ext_resource type="Script" uid="uid://dvokk5xg60ff" path="res://scripts/systems/lexicon/LexiconEntry.cs" id="1_qevom"]
+
+[resource]
+script = ExtResource("1_qevom")
+Id = "verb_ask"
+ForeignWord = "Pedir"
+NativeTranslation = "Ask"
+Category = 2
+metadata/_custom_type_script = "uid://dvokk5xg60ff"
