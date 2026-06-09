@@ -10,13 +10,15 @@ public partial class PlayerController : CharacterBody2D
     private InventoryComponent _inventory;
     private InventoryUI _inventoryUI;
 
-    [Export] private Texture2D UpTexture;
-    [Export] private Texture2D DownTexture;
-    [Export] private Texture2D LeftTexture;
-    [Export] private Texture2D RightTexture;
+    // [Export] private Texture2D UpTexture;
+    // [Export] private Texture2D DownTexture;
+    // [Export] private Texture2D LeftTexture;
+    // [Export] private Texture2D RightTexture;
 
-    private Sprite2D _sprite;
+    private AnimatedSprite2D _animatedSprite;
     private string _lastDirection = "down";
+    private string _currentAnimation = "";
+
     public override void _Ready()
     {
         if (Instance != null && Instance != this)
@@ -31,7 +33,7 @@ public partial class PlayerController : CharacterBody2D
         _inventoryUI = GetTree().CurrentScene.GetNode<InventoryUI>("InventoryUI");
         _inventory.InventoryChanged += OnInventoryChanged;
 
-        _sprite = GetNode<Sprite2D>("Sprite2D");
+        _animatedSprite = GetNode<AnimatedSprite2D>("Sprite2D");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -83,18 +85,21 @@ public partial class PlayerController : CharacterBody2D
     private void UpdateDirection(Vector2 input)
     {
         if (input == Vector2.Zero)
+        {
+            PlayAnimation("default");
             return;
+        }
 
         if (Mathf.Abs(input.X) > Mathf.Abs(input.Y))
         {
             if (input.X > 0)
             {
-                _sprite.Texture = RightTexture;
+                PlayAnimation("Walk_right");
                 _lastDirection = "right";
             }
             else
             {
-                _sprite.Texture = LeftTexture;
+                PlayAnimation("Walk_left");
                 _lastDirection = "left";
             }
         }
@@ -102,15 +107,24 @@ public partial class PlayerController : CharacterBody2D
         {
             if (input.Y > 0)
             {
-                _sprite.Texture = DownTexture;
+                PlayAnimation("Walk_down");
                 _lastDirection = "down";
             }
             else
             {
-                _sprite.Texture = UpTexture;
+                PlayAnimation("Walk_up");
                 _lastDirection = "up";
             }
         }
+    }
+
+    private void PlayAnimation(string animationName)
+    {
+        if (_currentAnimation == animationName)
+            return;
+
+        _currentAnimation = animationName;
+        _animatedSprite.Play(animationName);
     }
 
 }
