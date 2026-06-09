@@ -33,6 +33,7 @@ VocabularyManager="*res://scripts/autoload/VocabularyManager.cs"
 TTSService="*res://scripts/autoload/TTSService.cs"
 AudioSettingsManager="*uid://5s8crj43andc"
 DialogueManager="*uid://c2dpn2woeems3"
+LanguageManager="*uid://crh53heil8t4b"
 
 [display]
 
@@ -131,4 +132,4 @@ textures/vram_compression/import_etc2_astc=true
 
 [tts]
 
-base_url="https://ehb-finalwork-lingorise.onrender.com"
+base_url="http://localhost:3000"
