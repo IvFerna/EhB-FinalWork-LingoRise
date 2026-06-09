@@ -15,8 +15,7 @@ public partial class BakeryScene : Control
         GetNode<Camera2D>("Camera2D").Enabled = true;
 
         player.Position = playerSpawnPoint.Position;
-        QuestUI.Instance._mainLabel.Text = "Buy breakfast";
-        QuestUI.Instance._subLabel.Text = "Talk to the baker";
+        QuestUI.Instance.SetQuest("quest_buy_breakfast", "quest_talk_baker");
         QuestUI.Instance._subLabel.Visible = true;
 
         DialogueManager.Instance.SetDialogueEnabled(true);
@@ -47,7 +46,7 @@ public partial class BakeryScene : Control
 
         _completed = true;
 
-        QuestUI.Instance._mainLabel.Text = "Completed!";
+        QuestUI.Instance._mainLabel.Text = LanguageManager.Instance.GetText("quest_completed");
         QuestUI.Instance._subLabel.Visible = false;
 
         baker.OnQuestCompleted();

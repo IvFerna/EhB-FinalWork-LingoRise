@@ -17,6 +17,8 @@ public partial class MainHubScene : Control
             return;
         }
 
+        QuestUI.Instance.SetQuest("quest_explore_town");
+
         GD.Print("player found:", player);
         player.SetCameraEnabled(true);
 

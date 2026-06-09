@@ -18,8 +18,7 @@ public partial class CoffeeShopScene : Control
         GetNode<Camera2D>("Camera2D").Enabled = true;
 
         player.Position = playerSpawnPoint.Position;
-        QuestUI.Instance._mainLabel.Text = "Serve the customers";
-        QuestUI.Instance._subLabel.Text = "Talk to a customer";
+        QuestUI.Instance.SetQuest("quest_serve_customers", "quest_talk_customer");
 
         DialogueManager.Instance.SetDialogueEnabled(true);
     }
@@ -58,7 +57,7 @@ public partial class CoffeeShopScene : Control
         Main.Instance.CompleteScenario("coffee_shop");
 
         GD.Print("Coffee Shop scenario completed!");
-        QuestUI.Instance._mainLabel.Text = "Completed!";
+        QuestUI.Instance._mainLabel.Text = LanguageManager.Instance.GetText("quest_completed");
         QuestUI.Instance._subLabel.Text = "";
         QuestUI.Instance._subLabel.Visible = false;
 
