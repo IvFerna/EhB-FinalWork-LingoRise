@@ -45,7 +45,7 @@ font_color = Color(0.93333334, 0.84313726, 0.49803922, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4vvhv"]
 
-[node name="SettingsMenu" type="Control" unique_id=603313726 node_paths=PackedStringArray("_masterSlider", "_musicSlider", "_voiceSlider", "_masterIcon", "_musicIcon", "_voiceIcon")]
+[node name="SettingsMenu" type="Control" unique_id=603313726 node_paths=PackedStringArray("_masterSlider", "_musicSlider", "_voiceSlider", "_masterIcon", "_musicIcon", "_voiceIcon", "_volumeLabel", "_nativeLabel", "_foreignLabel", "_nativeLanguageOption")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +63,11 @@ _muteIcon = ExtResource("2_1u7tj")
 _lowIcon = ExtResource("3_ymo6e")
 _mediumIcon = ExtResource("4_sikgn")
 _highIcon = ExtResource("4_e6rp2")
+_volumeLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/VolumeLabel")
+_nativeLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/LanguageRow/Label")
+_foreignLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/LanguageRow2/Label2")
+_nativeLanguageOption = NodePath("PanelContainer/MarginContainer/VBoxContainer/LanguageRow/OptionButton")
+metadata/_edit_horizontal_guides_ = [1088.0]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=783731973]
 layout_mode = 1
@@ -212,9 +217,9 @@ layout_mode = 2
 theme = ExtResource("2_dyeuv")
 selected = 1
 item_count = 5
-popup/item_0/text = "EN"
+popup/item_0/text = "en"
 popup/item_0/id = 0
-popup/item_1/text = "NL"
+popup/item_1/text = "nl"
 popup/item_1/id = 1
 popup/item_2/text = "FR"
 popup/item_2/id = 2
@@ -314,5 +319,6 @@ grow_vertical = 0
 text = "Reset game"
 
 [connection signal="pressed" from="CloseButton" to="." method="OnClosePressed"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/LanguageRow/OptionButton" to="." method="OnNativeLanguageChanged"]
 [connection signal="pressed" from="Button2" to="." method="onBackPressed"]
 [connection signal="pressed" from="Button" to="." method="OnResetProgressPressed"]
