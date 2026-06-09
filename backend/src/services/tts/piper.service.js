@@ -5,11 +5,11 @@ const sanitize = require("sanitize-filename");
 
 const STORAGE_PATH = path.join(__dirname, "../../storage/tts");
 
-const PIPER_PATH = process.env.PIPER_PATH || path.join(process.cwd(), "tools/piper/piper");
+const PIPER_PATH = process.env.PIPER_PATH || path.join(process.cwd(), "../tools/piper/piper");
 
 const MODEL_PATH =
 	process.env.MODEL_PATH ||
-	path.join(process.cwd(), "tools/piper/models/es_ES-sharvard-medium.onnx");
+	path.join(process.cwd(), "../tools/piper/models/es_ES-sharvard-medium.onnx");
 
 function normalizeText(text) {
 	return sanitize(
@@ -24,6 +24,14 @@ function normalizeText(text) {
 }
 
 exports.generateSpeech = async (text, language) => {
+	console.log({
+		cwd: process.cwd(),
+		piper: PIPER_PATH,
+		model: MODEL_PATH,
+		piperExists: fs.existsSync(PIPER_PATH),
+		modelExists: fs.existsSync(MODEL_PATH),
+	});
+
 	const normalized = normalizeText(text);
 	const fileName = `${language}_${normalized}.wav`;
 	const outputPath = path.join(STORAGE_PATH, fileName);
