@@ -15,8 +15,19 @@ public partial class SettingsMenu : Control
     [Export] private Texture2D _mediumIcon;
     [Export] private Texture2D _highIcon;
 
+    [Export] private Label _volumeLabel;
+    [Export] private Label _nativeLabel;
+    [Export] private Label _foreignLabel;
+
+    [Export] private OptionButton _nativeLanguageOption;
+    // [Export] private OptionButton _foreignLanguageOption;
+
     public override void _Ready()
     {
+        LanguageManager.Instance.LanguageChanged += RefreshTexts;
+
+        RefreshTexts();
+
         _masterSlider.ValueChanged += OnMasterVolumeChanged;
         _musicSlider.ValueChanged += OnMusicVolumeChanged;
         _voiceSlider.ValueChanged += OnVoiceVolumeChanged;
@@ -24,6 +35,11 @@ public partial class SettingsMenu : Control
         _masterSlider.Value = AudioSettingsManager.Instance.MasterVolume;
         _musicSlider.Value = AudioSettingsManager.Instance.MusicVolume;
         _voiceSlider.Value = AudioSettingsManager.Instance.VoiceVolume;
+
+        _volumeLabel.Text = LanguageManager.Instance.GetText("settings_volume_label");
+        _nativeLabel.Text = LanguageManager.Instance.GetText("settings_native_language_label");
+        _foreignLabel.Text = LanguageManager.Instance.GetText("settings_foreign_language_label");
+
     }
     private void OnMasterVolumeChanged(double value)
     {
@@ -79,6 +95,31 @@ public partial class SettingsMenu : Control
         Main.Instance.ResetGame();
         GD.Print("Game progress reset.");
         UIManager.Instance.CloseCurrentSubmenu(this);
+    }
+
+    private void OnNativeLanguageChanged(int index)
+    {
+        string selectedLanguage = _nativeLanguageOption.GetItemText(index);
+        LanguageManager.Instance.SetLanguage(selectedLanguage);
+        GD.Print($"Native language changed to: {selectedLanguage}");
+    }
+
+    public override void _ExitTree()
+    {
+        if (LanguageManager.Instance != null)
+            LanguageManager.Instance.LanguageChanged -= RefreshTexts;
+    }
+
+    private void RefreshTexts()
+    {
+        _volumeLabel.Text =
+            LanguageManager.Instance.GetText("settings_volume_label");
+
+        _nativeLabel.Text =
+            LanguageManager.Instance.GetText("settings_native_language_label");
+
+        _foreignLabel.Text =
+            LanguageManager.Instance.GetText("settings_foreign_language_label");
     }
 
 }
