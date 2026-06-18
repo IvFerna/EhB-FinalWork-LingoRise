@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcyqmwe6uj6n5" path="res://scripts/gameplay/PlayerController.cs" id="1_kaei4"]
 [ext_resource type="Texture2D" uid="uid://bjmk706m7jgiy" path="res://assets/Characters/test_0005.png" id="2_6vs3b"]
+[ext_resource type="Texture2D" uid="uid://cupvp5krl1un0" path="res://assets/Characters/shadow.png" id="2_od7t0"]
 [ext_resource type="Script" uid="uid://dqxau4vhxme48" path="res://scripts/systems/Inventory/InventoryComponent.cs" id="3_crf5v"]
 [ext_resource type="Texture2D" uid="uid://cp3eugrdpsrvt" path="res://assets/Characters/PlayerAnimations/WalkLeft/walk_left_0001.png" id="4_cr8mp"]
 [ext_resource type="Texture2D" uid="uid://c4abq8tros4cl" path="res://assets/Characters/test_0007.png" id="4_wttx2"]
@@ -103,6 +104,12 @@ collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_kaei4")
 moveSpeed = 400.0
+
+[node name="shadow" type="Sprite2D" parent="." unique_id=1179575944]
+modulate = Color(1, 1, 1, 0.4)
+position = Vector2(1.25, 117.00001)
+scale = Vector2(1.1428572, 0.6857143)
+texture = ExtResource("2_od7t0")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1108286960]
 sprite_frames = SubResource("SpriteFrames_4ah8q")

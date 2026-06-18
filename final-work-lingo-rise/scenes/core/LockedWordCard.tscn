@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://duyj4sj8ks7iy"]
+[gd_scene format=3 uid="uid://duyj4sj8ks7iy"]
 
 [ext_resource type="Script" uid="uid://dlhghfp3l6w3p" path="res://scripts/ui/WordCard.cs" id="1_7cbjm"]
-[ext_resource type="Texture2D" uid="uid://bnkpihl5yfq5a" path="res://assets/icon.svg" id="2_yl6is"]
+[ext_resource type="Texture2D" uid="uid://ooeb2vyx0a3v" path="res://assets/Lock.png" id="2_7cbjm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8u6s"]
 content_margin_left = 8.0
@@ -19,7 +19,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[node name="WordCard" type="PanelContainer" node_paths=PackedStringArray("_icon", "_wordLabel")]
+[node name="WordCard" type="PanelContainer" unique_id=719086364 node_paths=PackedStringArray("_icon", "_wordLabel")]
 custom_minimum_size = Vector2(460, 650)
 offset_left = 2.0
 offset_right = 462.0
@@ -29,28 +29,26 @@ script = ExtResource("1_7cbjm")
 _icon = NodePath("MarginContainer/VBoxContainer/TextureRect")
 _wordLabel = NodePath("MarginContainer/VBoxContainer/Label")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1562806055]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2117638255]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=839299144]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_yl6is")
-expand_mode = 1
-stretch_mode = 5
+texture = ExtResource("2_7cbjm")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=291696013]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
